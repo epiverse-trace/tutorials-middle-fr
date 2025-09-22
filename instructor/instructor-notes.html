@@ -250,7 +250,7 @@
 <div class="accordion accordion-flush" id="accordionFlush2">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading2">
-        <a href="delays-access.html">1. Access epidemiological delay distributions</a>
+        <a href="delays-access.html">1. Accéder aux distributions des retards épidémiologiques</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -322,110 +322,27 @@ any links that you are not going to use.
  -->
 
 
-      <section id="aggregate-instructor-notes"><section id="delays-access"><h2 class="section-heading"><a href="delays-access.html">Access epidemiological delay distributions</a></h2>
+      <section id="aggregate-instructor-notes"><section id="delays-access"><h2 class="section-heading"><a href="delays-access.html">Accéder aux distributions des retards épidémiologiques</a></h2>
 <hr class="half-width">
 <h3 id="delays-access-headingInstructor1">
 <a href="delays-access.html#headingInstructor1">Remarque de l'instructeur</a><a class="anchor" aria-label="ancre" href="#delays-access-headingInstructor1"></a>
 </h3>
-<p>The objective of the assessment above is to assess the interpretation
-of a larger or shorter generation time.</p>
+<p>Les premiers modèles pour COVID-19 utilisaient des paramètres
+d’autres coronavirus. <a href="https://www.thelancet.com/article/S1473-3099(20)30144-4/fulltext" class="external-link uri">https://www.thelancet.com/article/S1473-3099(20)30144-4/fulltext</a></p>
 <hr>
 <br><h3 id="delays-access-headingInstructor2">
 <a href="delays-access.html#headingInstructor2">Remarque de l'instructeur</a><a class="anchor" aria-label="ancre" href="#delays-access-headingInstructor2"></a>
 </h3>
-<div class="codewrapper sourceCode" id="cb33">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># ebola serial interval</span></span>
-<span><span class="va">ebola_serial</span> <span class="op">&lt;-</span></span>
-<span>  <span class="fu">epiparameter</span><span class="fu">::</span><span class="fu">epiparameter_db</span><span class="op">(</span></span>
-<span>    disease <span class="op">=</span> <span class="st">"ebola"</span>,</span>
-<span>    epi_name <span class="op">=</span> <span class="st">"serial"</span>,</span>
-<span>    single_epiparameter <span class="op">=</span> <span class="cn">TRUE</span></span>
-<span>  <span class="op">)</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">SORTIE<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>Using WHO Ebola Response Team, Agua-Agum J, Ariyarajah A, Aylward B, Blake I,
-Brennan R, Cori A, Donnelly C, Dorigatti I, Dye C, Eckmanns T, Ferguson
-N, Formenty P, Fraser C, Garcia E, Garske T, Hinsley W, Holmes D,
-Hugonnet S, Iyengar S, Jombart T, Krishnan R, Meijers S, Mills H,
-Mohamed Y, Nedjati-Gilani G, Newton E, Nouvellet P, Pelletier L,
-Perkins D, Riley S, Sagrado M, Schnitzler J, Schumacher D, Shah A, Van
-Kerkhove M, Varsaneux O, Kannangarage N (2015). "West African Ebola
-Epidemic after One Year — Slowing but Not Yet under Control." _The New
-England Journal of Medicine_. doi:10.1056/NEJMc1414992
-&lt;https://doi.org/10.1056/NEJMc1414992&gt;..
-To retrieve the citation use the 'get_citation' function</code></pre>
-</div>
-<div class="codewrapper sourceCode" id="cb35">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ebola_serial</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">SORTIE<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>Disease: Ebola Virus Disease
-Pathogen: Ebola Virus
-Epi Parameter: serial interval
-Study: WHO Ebola Response Team, Agua-Agum J, Ariyarajah A, Aylward B, Blake I,
-Brennan R, Cori A, Donnelly C, Dorigatti I, Dye C, Eckmanns T, Ferguson
-N, Formenty P, Fraser C, Garcia E, Garske T, Hinsley W, Holmes D,
-Hugonnet S, Iyengar S, Jombart T, Krishnan R, Meijers S, Mills H,
-Mohamed Y, Nedjati-Gilani G, Newton E, Nouvellet P, Pelletier L,
-Perkins D, Riley S, Sagrado M, Schnitzler J, Schumacher D, Shah A, Van
-Kerkhove M, Varsaneux O, Kannangarage N (2015). "West African Ebola
-Epidemic after One Year — Slowing but Not Yet under Control." _The New
-England Journal of Medicine_. doi:10.1056/NEJMc1414992
-&lt;https://doi.org/10.1056/NEJMc1414992&gt;.
-Distribution: gamma (days)
-Parameters:
-  shape: 2.188
-  scale: 6.490</code></pre>
-</div>
-<div class="codewrapper sourceCode" id="cb37">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># get the sd</span></span>
-<span><span class="va">ebola_serial</span><span class="op">$</span><span class="va">summary_stats</span><span class="op">$</span><span class="va">sd</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">SORTIE<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>[1] 9.6</code></pre>
-</div>
-<div class="codewrapper sourceCode" id="cb39">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># get the sample_size</span></span>
-<span><span class="va">ebola_serial</span><span class="op">$</span><span class="va">metadata</span><span class="op">$</span><span class="va">sample_size</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">SORTIE<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>[1] 305</code></pre>
-</div>
-<p>Try to visualise this distribution using <code>plot()</code>.</p>
-<p>Also, explore all the other nested elements within the
-<code>&lt;epiparameter&gt;</code> object.</p>
-<p>Share about:</p>
-<ul>
-<li>What elements do you find useful for your analysis?</li>
-<li>What other elements would you like to see in this object? How?</li>
-</ul>
+<p>L’objectif de l’évaluation ci-dessus est d’évaluer l’interprétation
+d’un temps de génération plus long ou plus court.</p>
 <hr>
 <br><h3 id="delays-access-headingInstructor3">
 <a href="delays-access.html#headingInstructor3">Remarque de l'instructeur</a><a class="anchor" aria-label="ancre" href="#delays-access-headingInstructor3"></a>
 </h3>
-<p>An interesting element is the <code>method_assess</code> nested
-entry, which refers to the methods used by the study authors to assess
-for bias while estimating the serial interval distribution.</p>
+<p>Un élément intéressant est le <code>method_assess</code> qui fait
+référence aux méthodes utilisées par les auteurs de l’étude pour évaluer
+les biais lors de l’estimation de la distribution des intervalles
+sériels.</p>
 <div class="codewrapper sourceCode" id="cb41">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -444,18 +361,19 @@ $right_truncated
 $phase_bias_adjusted
 [1] FALSE</code></pre>
 </div>
-<p>We will explore these concepts following episodes!</p>
+<p>Nous explorerons ces concepts au fil des épisodes !</p>
 <hr>
 <br><h3 id="delays-access-headingInstructor4">
 <a href="delays-access.html#headingInstructor4">Remarque de l'instructeur</a><a class="anchor" aria-label="ancre" href="#delays-access-headingInstructor4"></a>
 </h3>
-<p>In the context of user interfaces and graphical user interfaces
-(GUIs), like the <a href="https://ben18785.shinyapps.io/distribution-zoo/" class="external-link">Distribution
-Zoo</a> shiny app, a <strong>slider</strong> is a graphical control
-element that allows users to adjust a value by moving a handle along a
-track or bar. Conceptually, it provides a way to select a numeric value
-within a specified range by visually sliding or dragging a pointer (the
-handle) along a continuous axis.</p>
+<p>Dans le contexte des interfaces utilisateurs et des interfaces
+graphiques (GUI), comme le <a href="https://ben18785.shinyapps.io/distribution-zoo/" class="external-link">Zoo de la
+distribution</a> une application <strong>glissière</strong> est un
+élément de contrôle graphique qui permet aux utilisateurs d’ajuster une
+valeur en déplaçant une poignée le long d’une piste ou d’une barre.
+Conceptuellement, il permet de sélectionner une valeur numérique dans
+une plage spécifiée en faisant glisser visuellement un pointeur (la
+poignée) le long d’un axe continu.</p>
 <hr>
 <br></section></section>
 </div>
