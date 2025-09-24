@@ -60,8 +60,8 @@ contact: 'andree.valle-campos@lshtm.ac.uk'
 # Order of episodes in your lesson
 episodes:
 - delays-access.Rmd
-#- quantify-transmissibility.Rmd
-#- delays-functions.Rmd
+- quantify-transmissibility.Rmd
+- delays-functions.Rmd
 #- create-forecast.Rmd
 #- severity-static.Rmd
 #- superspreading-estimate.Rmd
