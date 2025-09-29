@@ -101,7 +101,7 @@ Dans la ["`Expected change in reports`", l'appel](#expected-change-in-daily-case
 
 ### Données de cas
 
-Pour illustrer les fonctions des `EpiNow2` nous utiliserons les données relatives au début de la pandémie de COVID-19 au Royaume-Uni. Les données sont disponibles dans le package R `{incidence2}`.
+Pour illustrer les fonctions des `EpiNow2` nous utiliserons les données relatives au début de la pandémie de COVID-19 au Royaume-Uni, mais uniquement pour les 90 premiers jours observés. Les données sont disponibles dans le package R `{incidence2}`.
 
 
 ``` r
@@ -136,7 +136,8 @@ Utilisons `{tidyr}` et `{incidence2}` pour cela :
 
 
 ``` r
-cases <- incidence2::covidregionaldataUK %>%
+cases_sliced <- incidence2::covidregionaldataUK %>%
+  dplyr::as_tibble() %>%
   # Preprocess missing values
   tidyr::replace_na(base::list(cases_new = 0)) %>%
   # Compute the daily incidence
@@ -147,29 +148,8 @@ cases <- incidence2::covidregionaldataUK %>%
     date_names_to = "date",
     complete_dates = TRUE
   ) %>%
-  # Drop column for {EpiNow2} input format
-  dplyr::select(-count_variable) %>%
   # Keep the first 90 dates
   dplyr::slice_head(n = 90)
-
-cases
-```
-
-``` output
-# A tibble: 90 × 2
-   date       confirm
-   <date>       <dbl>
- 1 2020-01-30       3
- 2 2020-01-31       0
- 3 2020-02-01       0
- 4 2020-02-02       0
- 5 2020-02-03       0
- 6 2020-02-04       0
- 7 2020-02-05       2
- 8 2020-02-06       0
- 9 2020-02-07       0
-10 2020-02-08       8
-# ℹ 80 more rows
 ```
 
 Avec `incidence2::incidence()` nous agrégeons des cas sur différentes périodes de temps (*intervalles*, c'est-à-dire des jours, des semaines ou des mois) ou par groupe. Nous pouvons également obtenir les dates complètes pour tous les intervalles de dates par catégorie de groupe à l'aide de la fonction
@@ -178,7 +158,7 @@ Explorez plus tard les [`incidence2::incidence()` manuel de référence](https:/
 
 ::::::::::::::::::::::::: spoiler
 
-### Pouvons-nous reproduire {incidence2} avec {dplyr}?
+**Pouvons-nous reproduire {incidence2} avec {dplyr}?**
 
 Nous pouvons obtenir un objet similaire à `cases` à partir de l'objet `incidence2::covidregionaldataUK` à l'aide du package `{dplyr}`.
 
@@ -199,6 +179,34 @@ Cependant, `incidence2::incidence()` contient des arguments pratiques comme `com
 Dans une situation d'épidémie, il est probable que nous n'ayons accès qu'au début de l'ensemble des données d'entrée. Nous supposons donc que nous ne disposons que des 90 premiers jours de ces données.
 
 <img src="fig/quantify-transmissibility-rendered-unnamed-chunk-5-1.png" style="display: block; margin: auto;" />
+
+Pour transmettre les résultats de `{incidence2}` à `{EpiNow2}`, nous devons supprimer une colonne de l'objet `cases_filter` :
+
+
+``` r
+# Drop column for {EpiNow2} input format
+cases <- cases_sliced %>%
+  dplyr::select(-count_variable)
+
+cases
+```
+
+``` output
+# A tibble: 90 × 2
+   date       confirm
+   <date>       <dbl>
+ 1 2020-01-30       3
+ 2 2020-01-31       0
+ 3 2020-02-01       0
+ 4 2020-02-02       0
+ 5 2020-02-03       0
+ 6 2020-02-04       0
+ 7 2020-02-05       2
+ 8 2020-02-06       0
+ 9 2020-02-07       0
+10 2020-02-08       8
+# ℹ 80 more rows
+```
 
 ### Distribution des délais
 
@@ -254,6 +262,16 @@ incubation_period_fixed
 
 L'argument `max` est la valeur maximale que la distribution peut prendre ; dans cet exemple, 20 jours.
 
+Nous pouvons tracer les distributions générées par `{EpiNow2}` en utilisant `plot()`.
+
+
+``` r
+plot(incubation_period_fixed)
+```
+
+<img src="fig/quantify-transmissibility-rendered-unnamed-chunk-8-1.png" style="display: block; margin: auto;" />
+
+
 ::::::::::::::::::::::::::::::::::::: callout
 
 ### Pourquoi une distribution gamma ?
@@ -305,6 +323,14 @@ incubation_period_variable
         0.31
 ```
 
+Traçons la distribution que nous venons de configurer :
+
+``` r
+plot(incubation_period_variable)
+```
+
+<img src="fig/quantify-transmissibility-rendered-unnamed-chunk-10-1.png" style="display: block; margin: auto;" />
+
 #### Retards dans l'établissement des rapports
 
 Après la période d'incubation, il s'écoule un délai supplémentaire entre l'apparition des symptômes et la notification du cas : le délai de déclaration. Nous pouvons le spécifier comme une distribution fixe ou variable, ou estimer une distribution à partir de données.
@@ -324,7 +350,7 @@ reporting_delay_variable <- EpiNow2::LogNormal(
 
 :::::::::::::::::::::: spoiler
 
-### Visualisez une distribution log-normale en utilisant {epiparameter}
+**Visualisez une distribution log-normale en utilisant {epiparameter}**
 
 En utilisant `epiparameter::epiparameter()` nous pouvons créer une distribution personnalisée. La distribution normale à logarithme fixe aura l'aspect suivant :
 
@@ -349,32 +375,36 @@ epiparameter::epiparameter(
   plot()
 ```
 
-<img src="fig/quantify-transmissibility-rendered-unnamed-chunk-9-1.png" style="display: block; margin: auto;" />
+<img src="fig/quantify-transmissibility-rendered-unnamed-chunk-12-1.png" style="display: block; margin: auto;" />
 
 ::::::::::::::::::::::
 
-Nous pouvons tracer les distributions simples et combinées générées par `{EpiNow2}` en utilisant `plot()`. Combinons dans un même graphique le délai entre l'infection et la déclaration, qui comprend la période d'incubation et le délai de déclaration :
+:::::::::::::::::: spoiler
 
-
-``` r
-plot(incubation_period_variable + reporting_delay_variable)
-```
-
-<img src="fig/quantify-transmissibility-rendered-unnamed-chunk-10-1.png" style="display: block; margin: auto;" />
-
-:::::::::::::::::: callout
+**Comment obtenir le délai de reporting à partir des données ?**
 
 Si l'on dispose de données sur le délai entre l'apparition des symptômes et la déclaration, on peut utiliser la fonction `estimate_delay()` pour estimer une distribution log-normale à partir d'un vecteur de délais. Le code ci-dessous illustre comment utiliser la fonction `estimate_delay()` avec des données synthétiques sur les délais.
 
 
 ``` r
-delay_data <- rlnorm(500, log(5), 1) # synthetic delay data
+library(tidyverse)
 
-reporting_delay <- EpiNow2::estimate_delay(
-  delay_data,
-  samples = 1000,
-  bootstraps = 10
-)
+# Steps:
+# - get Ebola data from package {outbreaks}
+# - keep a subset of columns for this example only
+# - calculate the time difference between two dates in linelist
+# - extract the time difference as a vector class object
+# - estimate the delay parameters using {EpiNow2}
+
+outbreaks::ebola_sim_clean$linelist %>%
+  tibble::as_tibble() %>%
+  dplyr::select(case_id, date_of_onset, date_of_hospitalisation) %>%
+  dplyr::mutate(reporting_delay = date_of_hospitalisation - date_of_onset) %>%
+  dplyr::pull(reporting_delay) %>%
+  EpiNow2::estimate_delay(
+    samples = 1000,
+    bootstraps = 10
+  )
 ```
 
 ::::::::::::::::::
@@ -459,14 +489,6 @@ estimates <- EpiNow2::epinow(
 )
 ```
 
-``` output
-WARN [2025-09-24 17:18:19] epinow: There were 2 divergent transitions after warmup. See
-https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
-to find out why this is a problem and how to eliminate them. - 
-WARN [2025-09-24 17:18:19] epinow: Examine the pairs() plot to diagnose sampling problems
- - 
-```
-
 <!-- ``{r, message = FALSE,warning=FALSE, eval = TRUE, echo=FALSE} -->
 
 <!-- estimates <- EpiNow2::epinow( -->
@@ -520,7 +542,7 @@ Nous pouvons extraire et visualiser des estimations du nombre de reproductions e
 estimates$plots$R
 ```
 
-<img src="fig/quantify-transmissibility-rendered-unnamed-chunk-17-1.png" style="display: block; margin: auto;" />
+<img src="fig/quantify-transmissibility-rendered-unnamed-chunk-19-1.png" style="display: block; margin: auto;" />
 
 L'incertitude des estimations augmente avec le temps. Cela s'explique par le fait que les estimations sont fondées sur des données antérieures, c'est-à-dire sur les périodes de retard. Cette différence d'incertitude est classée dans les catégories suivantes **Estimation** (vert) utilise toutes les données et **Estimation basée sur des données partielles** (orange) des estimations basées sur moins de données (parce que les infections qui se sont produites à l'époque sont plus susceptibles de ne pas avoir encore été observées) et qui ont donc des intervalles de plus en plus larges vers la date du dernier point de données. Enfin, les **Prévision** (violet) est une projection dans le temps.
 
@@ -531,7 +553,7 @@ Nous pouvons également visualiser l'estimation du taux de croissance dans le te
 estimates$plots$growth_rate
 ```
 
-<img src="fig/quantify-transmissibility-rendered-unnamed-chunk-18-1.png" style="display: block; margin: auto;" />
+<img src="fig/quantify-transmissibility-rendered-unnamed-chunk-20-1.png" style="display: block; margin: auto;" />
 
 Pour extraire un résumé des principaux paramètres de transmission à dernière date* dans les données :
 
@@ -541,24 +563,24 @@ summary(estimates)
 ```
 
 ``` output
-                        measure               estimate
-                         <char>                 <char>
-1:       New infections per day   7939 (4719 -- 13259)
-2:   Expected change in reports                 Stable
-3:   Effective reproduction no.     0.97 (0.74 -- 1.2)
-4:               Rate of growth -0.011 (-0.1 -- 0.081)
-5: Doubling/halving time (days)      -66 (8.6 -- -6.9)
+                        measure                estimate
+                         <char>                  <char>
+1:       New infections per day    7954 (4600 -- 13451)
+2:   Expected change in reports                  Stable
+3:   Effective reproduction no.      0.97 (0.72 -- 1.2)
+4:               Rate of growth -0.012 (-0.11 -- 0.081)
+5: Doubling/halving time (days)       -58 (8.5 -- -6.5)
 ```
 
 Ces estimations étant basées sur des données partielles, elles présentent un large intervalle d'incertitude.
 
-- Le résumé de notre analyse montre que le changement attendu dans les déclarations est de Stable avec l'estimation des nouvelles infections 7939 (4719 -- 13259).
+- Le résumé de notre analyse montre que le changement attendu dans les déclarations est de Stable avec l'estimation des nouvelles infections 7954 (4600 -- 13451).
 
-- Le nombre effectif de reproduction $R_t$ (à la dernière date des données) est de 0.97 (0.74 -- 1.2).
+- Le nombre effectif de reproduction $R_t$ (à la dernière date des données) est de 0.97 (0.72 -- 1.2).
 
-- Le taux de croissance exponentiel du nombre de cas est de -0.011 (-0.1 -- 0.081).
+- Le taux de croissance exponentiel du nombre de cas est de -0.012 (-0.11 -- 0.081).
 
-- Le temps de doublement (le temps nécessaire pour que le nombre de cas double) est de -66 (8.6 -- -6.9).
+- Le temps de doublement (le temps nécessaire pour que le nombre de cas double) est de -58 (8.5 -- -6.5).
 
 ::::::::::::::::::::::::::::::::::::: callout
 
