@@ -9,6 +9,6 @@
 "episodes/delays-functions.Rmd" "7bc90c3b453e614691a6959c6770ae4d" "site/built/delays-functions.md" "2025-09-24"
 "instructors/instructor-notes.md" "ca3834a1b0f9e70c4702aa7a367a6bb5" "site/built/instructor-notes.md" "2025-09-22"
 "learners/reference.md" "9aada1c331ee11f38e078457ba343c62" "site/built/reference.md" "2025-09-22"
-"learners/setup.md" "00effb4d770221a439605719f252b7c1" "site/built/setup.md" "2025-09-23"
+"learners/setup.md" "d472955b863de4966288e2ee7c583ab4" "site/built/setup.md" "2025-10-01"
 "profiles/learner-profiles.md" "31b503c4b5bd1f0960ada730eca4a25e" "site/built/learner-profiles.md" "2025-09-22"
 "renv/profiles/lesson-requirements/renv.lock" "a41f7db6ad367e4f168d618570a3a98f" "site/built/renv.lock" "2025-09-22"
