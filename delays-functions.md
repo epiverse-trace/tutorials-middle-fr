@@ -24,7 +24,8 @@ editor_options:
 
 ## Conditions préalables
 
-- Compléter le tutoriel [Quantifier la transmission](https://epiverse-trace.github.io/tutorials-middle/quantify-transmissibility.html)
+- Compléter le tutoriel [Accéder aux distribution des délais épidémiologiques](../episodes/delays-functions.md)
+- Compléter le tutoriel [Quantifier la transmission](../episodes/quantify-transmissibility.md)
 
 Pour cet épisode, vous devez vous familiariser avec :
 
@@ -38,7 +39,16 @@ Pour cet épisode, vous devez vous familiariser avec :
 
 ## Introduction
 
-`{epiparameter}` nous aide à *choisir* un ensemble spécifique de paramètres épidémiologiques issus de la littérature, au lieu de les copier/coller *à la main*:
+Cet épisode intégrera le contenu des deux épisodes précédents. Commençons par charger le package`{epiparameter}` et `{EpiNow2}` . Nous utiliserons le tube `%>%`, quelques verbes de `{dplyr}` et `{ggplot2}` et donc appelons aussi à le package `{tidyverse}` :
+
+
+``` r
+library(epiparameter)
+library(EpiNow2)
+library(tidyverse)
+```
+
+Pour résumer, nous avons appris que `{epiparameter}` nous aide à *choisir* un ensemble spécifique de paramètres épidémiologiques issus de la littérature, au lieu de les copier/coller *à la main*:
 
 
 ``` r
@@ -51,7 +61,7 @@ covid_serialint <-
   )
 ```
 
-Nous avons maintenant un paramètre épidémiologique que nous pouvons utiliser dans notre analyse ! Dans le bloc de code ci-dessous, nous avons remplacé un des paramètres **statistiques sommaires** en `EpiNow2::LogNormal()`
+Nous avons maintenant un paramètre épidémiologique que nous pouvons utiliser dans notre analyse ! Par exemple, pour quantifier la transmission, nous pouvons utiliser l'intervalle sériel comme approximation du temps de génération. Dans le bloc de code ci-dessous, nous avons remplacé un des paramètres **statistiques sommaires** en `EpiNow2::LogNormal()`
 
 ```r
 generation_time <- 
@@ -62,18 +72,7 @@ generation_time <-
   )
 ```
 
-Dans cet épisode, nous utiliserons les **fonctions de distribution** qui `{epiparameter}` fournit pour obtenir une valeur maximale (`max`) pour ce package et tout autre package en aval dans votre pipeline d'analyse !
-
-Chargeons le package`{epiparameter}` et `{EpiNow2}` . Pour `{EpiNow2}` nous mettrons 4 cœurs à utiliser pour les calculs parallèles. Nous utiliserons le tube `%>%`, quelques verbes de `{dplyr}` et `{ggplot2}` et donc appelons aussi à le package `{tidyverse}` :
-
-
-``` r
-library(epiparameter)
-library(EpiNow2)
-library(tidyverse)
-
-withr::local_options(list(mc.cores = 4))
-```
+Dans cet épisode, nous utiliserons les **fonctions de distribution** qui `{epiparameter}` fournit pour obtenir une médiane, valeur maximale (`max`), percentiles ou quantiles pour tout objet de classe `<epiparameter>`. Ils vous seront utiles en aval dans votre pipeline d'analyse !
 
 ::::::::::::::::::: checklist
 
@@ -100,9 +99,9 @@ En R, toutes les distributions statistiques disposent de fonctions qui permettan
 
 ### Fonctions pour la loi normale
 
-Si vous en avez besoin, lisez en détail la rubrique [Fonctions de probabilité R pour la loinormale](https://sakai.unc.edu/access/content/group/3d1eb92e-7848-4f55-90c3-7c72a54e7e43/public/docs/lectures/lecture13.htm#probfunc) Pour en savoir plus sur les fonctions de probabilité de la loi normale, lisez les définitions de chacune d'entre elles et identifiez la partie de la loi dans laquelle elles se situent !
+Si vous en avez besoin, lisez en détail la rubrique [Fonctions de probabilité R pour la loinormale](https://web.archive.org/web/20240210121034/https://sakai.unc.edu/access/content/group/3d1eb92e-7848-4f55-90c3-7c72a54e7e43/public/docs/lectures/lecture13.htm#probfunc) Pour en savoir plus sur les fonctions de probabilité de la loi normale, lisez les définitions de chacune d'entre elles et identifiez la partie de la loi dans laquelle elles se situent !
 
-![Les quatre fonctions de probabilité de la loi normale ([Jack Weiss, 2012](https://sakai.unc.edu/access/content/group/3d1eb92e-7848-4f55-90c3-7c72a54e7e43/public/docs/lectures/lecture13.htm#probfunc))](fig/fig5a-normaldistribution.png)
+![Les quatre fonctions de probabilité de la loi normale ([Jack Weiss, 2012](https://web.archive.org/web/20240210121034/https://sakai.unc.edu/access/content/group/3d1eb92e-7848-4f55-90c3-7c72a54e7e43/public/docs/lectures/lecture13.htm#probfunc))](fig/fig5a-normaldistribution.png)
 
 ::::::::::::::::::::
 
@@ -111,8 +110,12 @@ Si vous regardez `?stats::Distributions`, chaque type de distribution possède u
 
 ``` r
 # plot this to have a visual reference
-plot(covid_serialint, day_range = 0:20)
+
+# continuous distribution
+plot(covid_serialint, xlim = c(0, 20))
 ```
+
+<img src="fig/delays-functions-rendered-unnamed-chunk-3-1.png" style="display: block; margin: auto;" />
 
 
 ``` r
@@ -126,7 +129,7 @@ density(covid_serialint, at = 10)
 
 ``` r
 # the cumulative probability at quantile value of 10 (days)
-cdf(covid_serialint, q = 10)
+epiparameter::cdf(covid_serialint, q = 10)
 ```
 
 ``` output
@@ -145,12 +148,12 @@ quantile(covid_serialint, p = 0.6)
 ``` r
 # generate 10 random values (days) given
 # the distribution family and its parameters
-generate(covid_serialint, times = 10)
+epiparameter::generate(covid_serialint, times = 10)
 ```
 
 ``` output
- [1]  4.759338  6.289728  4.294399  2.739490  3.163588  4.367772  6.247139
- [8]  3.735905 20.076741  5.234137
+ [1] 4.134672 4.773449 1.172126 2.308758 2.659514 6.922529 5.379442 4.953638
+ [9] 4.830915 1.884930
 ```
 
 ::::::::: instructor
@@ -176,7 +179,7 @@ Avec l'intervalle sériel COVID-19 (`covid_serialint`), calculez :
 
 ::::::::::::::::: hint
 
-Dans la figure 5 du [Fonctions de probabilité R pour la loi normale](https://sakai.unc.edu/access/content/group/3d1eb92e-7848-4f55-90c3-7c72a54e7e43/public/docs/lectures/lecture13.htm#probfunc) la partie ombrée représente une probabilité cumulée de `0.997` pour la valeur du quantile à `x = 2`.
+Dans la figure 5 du [Fonctions de probabilité R pour la loi normale](https://web.archive.org/web/20240210121034/https://sakai.unc.edu/access/content/group/3d1eb92e-7848-4f55-90c3-7c72a54e7e43/public/docs/lectures/lecture13.htm#probfunc) la partie ombrée représente une probabilité cumulée de `0.997` pour la valeur du quantile à `x = 2`.
 
 ::::::::::::::::::::::
 
@@ -189,7 +192,7 @@ plot(covid_serialint)
 
 
 ``` r
-cdf(covid_serialint, q = 2)
+epiparameter::cdf(covid_serialint, q = 2)
 ```
 
 ``` output
@@ -197,7 +200,7 @@ cdf(covid_serialint, q = 2)
 ```
 
 ``` r
-cdf(covid_serialint, q = 6)
+epiparameter::cdf(covid_serialint, q = 6)
 ```
 
 ``` output
@@ -275,12 +278,11 @@ Alors que pour une distribution **continue** nous traçons la courbe de la *Fonc
 
 
 ``` r
-# continuous
-plot(covid_serialint)
-
-# discrete
+# discrete distribution
 plot(covid_serialint_discrete)
 ```
+
+<img src="fig/delays-functions-rendered-unnamed-chunk-9-1.png" style="display: block; margin: auto;" />
 
 Pour obtenir enfin une `max`, accédons à la valeur du quantile du 99e percentile ou `0.99` de la distribution à l'aide de la fonction `prob_dist$q` de la même manière que nous accédons à les valeurs `summary_stats`.
 
@@ -309,19 +311,19 @@ Les fonctions de probabilité pour les distributions `<epiparameter>` **discrèt
 
 ``` r
 # plot to have a visual reference
-plot(covid_serialint_discrete, day_range = 0:20)
+plot(covid_serialint_discrete, xlim = c(0, 20))
 
 # density value at quantile value 10 (day)
 density(covid_serialint_discrete, at = 10)
 
 # cumulative probability at quantile value 10 (day)
-cdf(covid_serialint_discrete, q = 10)
+epiparameter::cdf(covid_serialint_discrete, q = 10)
 
 # In what quantile value (days) do we have the 60% cumulative probability?
 quantile(covid_serialint_discrete, p = 0.6)
 
 # generate random values
-generate(covid_serialint_discrete, times = 10)
+epiparameter::generate(covid_serialint_discrete, times = 10)
 ```
 
 ::::::::::::::::::::::
@@ -449,11 +451,14 @@ Dans l'hypothèse d'un scénario COVID-19, utilisons les 60 premiers jours de l�
 
 
 ``` r
-epinow_estimates_cg <- epinow(
+# Set 4 cores to be used in parallel computations
+withr::local_options(list(mc.cores = 4))
+
+epinow_estimates_cg <- EpiNow2::epinow(
   # cases
   data = example_confirmed[1:60],
   # delays
-  generation_time = generation_time_opts(serial_interval_covid)
+  generation_time = EpiNow2::generation_time_opts(serial_interval_covid)
 )
 
 base::plot(epinow_estimates_cg)
@@ -470,6 +475,12 @@ La sortie `plot()` comprend les cas estimés par date d'infection, qui sont reco
 L'utilisation de l'intervalle sériel au lieu du temps de génération est une alternative qui peut propager un biais dans vos estimations, d'autant plus pour les maladies dont la transmission pré-symptomatique est signalée. ([Chung Lau et al, 2021](https://academic.oup.com/jid/article/224/10/1664/6356465))
 
 ::::::::::::::::::
+
+::::::::::::::::::: instructor
+
+We can stop the livecoding at this stage and move on with the practical.
+
+:::::::::::::::::::
 
 ## Ajustement pour tenir compte des délais de déclaration
 
@@ -494,12 +505,12 @@ Utilisez le dernier calcul d’ `epinow()` à l'aide de l’argument `delays` et
 L'argument `delays` et la fonction d’aide`delay_opts()` sont analogues à l’argument `generation_time` et à la fonction d’aide `generation_time_opts()`.
 
 ```r
-epinow_estimates <- epinow(
+epinow_estimates <- EpiNow2::epinow(
   # cases
   reported_cases = example_confirmed[1:60],
   # delays
-  generation_time = generation_time_opts(covid_serial_interval),
-  delays = delay_opts(covid_incubation_time)
+  generation_time = EpiNow2::generation_time_opts(covid_serial_interval),
+  delays = EpiNow2::delay_opts(covid_incubation_time)
 )
 ```
 
@@ -563,12 +574,12 @@ covid_incubation_time <-
 # epinow ------------------------------------------------------------------
 
 # run epinow
-epinow_estimates_cgi <- epinow(
+epinow_estimates_cgi <- EpiNow2::epinow(
   # cases
   data = example_confirmed[1:60],
   # delays
-  generation_time = generation_time_opts(covid_serial_interval),
-  delays = delay_opts(covid_incubation_time)
+  generation_time = EpiNow2::generation_time_opts(covid_serial_interval),
+  delays = EpiNow2::delay_opts(covid_incubation_time)
 )
 
 base::plot(epinow_estimates_cgi)
@@ -705,12 +716,12 @@ incubation_period_ebola <-
 # epinow ------------------------------------------------------------------
 
 # run epinow
-epinow_estimates_egi <- epinow(
+epinow_estimates_egi <- EpiNow2::epinow(
   # cases
   data = ebola_confirmed,
   # delays
-  generation_time = generation_time_opts(serial_interval_ebola),
-  delays = delay_opts(incubation_period_ebola)
+  generation_time = EpiNow2::generation_time_opts(serial_interval_ebola),
+  delays = EpiNow2::delay_opts(incubation_period_ebola)
 )
 
 plot(epinow_estimates_egi)
@@ -858,12 +869,12 @@ influenza_cleaned <-
   select(date, confirm = in_bed)
 
 # Run epinow()
-epinow_estimates_igi <- epinow(
+epinow_estimates_igi <- EpiNow2::epinow(
   # cases
   data = influenza_cleaned,
   # delays
-  generation_time = generation_time_opts(generation_time_influenza),
-  delays = delay_opts(incubation_time_influenza)
+  generation_time = EpiNow2::generation_time_opts(generation_time_influenza),
+  delays = EpiNow2::delay_opts(incubation_time_influenza)
 )
 
 plot(epinow_estimates_igi)
