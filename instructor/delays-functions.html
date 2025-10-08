@@ -212,7 +212,7 @@
 <div class="accordion accordion-flush" id="accordionFlush2">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading2">
-        <a href="delays-access.html">1. Accéder aux distributions des retards épidémiologiques</a>
+        <a href="delays-access.html">1. Accéder aux distribution des délais épidémiologiques</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -311,7 +311,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Utiliser les distributions de délais dans l'analyse</h1>
-        <p>Dernière mise à jour le 2025-09-24 |
+        <p>Dernière mise à jour le 2025-10-08 |
 
         <a href="https://github.com/epiverse-trace/tutorials-middle-fr/edit/main/episodes/delays-functions.Rmd" class="external-link">Modifier cette page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -360,8 +360,11 @@ entrées <a href="https://epiforecasts.io/EpiNow2/" class="external-link">EpiNow
 <div id="conditions-préalables" class="callout-inner">
 <h3 class="callout-title">Conditions préalables</h3>
 <div class="callout-content">
-<ul><li>Compléter le tutoriel <a href="https://epiverse-trace.github.io/tutorials-middle/quantify-transmissibility.html" class="external-link">Quantifier
-la transmission</a>
+<ul><li>Compléter le tutoriel <a href="delays-functions.html">Accéder aux
+distribution des délais épidémiologiques</a>
+</li>
+<li>Compléter le tutoriel <a href="quantify-transmissibility.html">Quantifier la
+transmission</a>
 </li>
 </ul><p>Pour cet épisode, vous devez vous familiariser avec :</p>
 <p><strong>Science des données</strong> Programmation de base avec
@@ -373,10 +376,24 @@ périodes de temps, nombre reproductif effectif.</p>
 </div>
 </div>
 <section><h2 class="section-heading" id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a></h2>
-<hr class="half-width"><p><a href="https://github.com/epiverse-trace/epiparameter/" class="external-link">epiparameter</a> nous aide à <em>choisir</em> un ensemble
-spécifique de paramètres épidémiologiques issus de la littérature, au
-lieu de les copier/coller <em>à la main</em>:</p>
+<hr class="half-width"><p>Cet épisode intégrera le contenu des deux épisodes précédents.
+Commençons par charger le package<a href="https://github.com/epiverse-trace/epiparameter/" class="external-link">epiparameter</a> et
+<a href="https://epiforecasts.io/EpiNow2/" class="external-link">EpiNow2</a> . Nous utiliserons le tube <code>%&gt;%</code>,
+quelques verbes de <a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a> et <a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a> et
+donc appelons aussi à le package <a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a> :</p>
 <div class="codewrapper sourceCode" id="cb1">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw">library</span><span class="op">(</span><span class="va">epiparameter</span><span class="op">)</span></span>
+<span><span class="kw">library</span><span class="op">(</span><span class="va">EpiNow2</span><span class="op">)</span></span>
+<span><span class="kw">library</span><span class="op">(</span><span class="va">tidyverse</span><span class="op">)</span></span></code></pre>
+</div>
+<p>Pour résumer, nous avons appris que <a href="https://github.com/epiverse-trace/epiparameter/" class="external-link">epiparameter</a> nous
+aide à <em>choisir</em> un ensemble spécifique de paramètres
+épidémiologiques issus de la littérature, au lieu de les copier/coller
+<em>à la main</em>:</p>
+<div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -389,10 +406,12 @@ lieu de les copier/coller <em>à la main</em>:</p>
 <span>  <span class="op">)</span></span></code></pre>
 </div>
 <p>Nous avons maintenant un paramètre épidémiologique que nous pouvons
-utiliser dans notre analyse ! Dans le bloc de code ci-dessous, nous
-avons remplacé un des paramètres <strong>statistiques sommaires</strong>
-en <code>EpiNow2::LogNormal()</code></p>
-<div class="codewrapper sourceCode" id="cb2">
+utiliser dans notre analyse ! Par exemple, pour quantifier la
+transmission, nous pouvons utiliser l’intervalle sériel comme
+approximation du temps de génération. Dans le bloc de code ci-dessous,
+nous avons remplacé un des paramètres <strong>statistiques
+sommaires</strong> en <code>EpiNow2::LogNormal()</code></p>
+<div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -405,24 +424,9 @@ en <code>EpiNow2::LogNormal()</code></p>
 </div>
 <p>Dans cet épisode, nous utiliserons les <strong>fonctions de
 distribution</strong> qui <a href="https://github.com/epiverse-trace/epiparameter/" class="external-link">epiparameter</a> fournit pour
-obtenir une valeur maximale (<code>max</code>) pour ce package et tout
-autre package en aval dans votre pipeline d’analyse !</p>
-<p>Chargeons le package<a href="https://github.com/epiverse-trace/epiparameter/" class="external-link">epiparameter</a> et
-<a href="https://epiforecasts.io/EpiNow2/" class="external-link">EpiNow2</a> . Pour <a href="https://epiforecasts.io/EpiNow2/" class="external-link">EpiNow2</a> nous mettrons 4
-cœurs à utiliser pour les calculs parallèles. Nous utiliserons le tube
-<code>%&gt;%</code>, quelques verbes de <a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a> et
-<a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a> et donc appelons aussi à le package
-<a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a> :</p>
-<div class="codewrapper sourceCode" id="cb3">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw">library</span><span class="op">(</span><span class="va">epiparameter</span><span class="op">)</span></span>
-<span><span class="kw">library</span><span class="op">(</span><span class="va">EpiNow2</span><span class="op">)</span></span>
-<span><span class="kw">library</span><span class="op">(</span><span class="va">tidyverse</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">withr</span><span class="fu">::</span><span class="fu">local_options</span><span class="op">(</span><span class="fu">list</span><span class="op">(</span>mc.cores <span class="op">=</span> <span class="fl">4</span><span class="op">)</span><span class="op">)</span></span></code></pre>
-</div>
+obtenir une médiane, valeur maximale (<code>max</code>), percentiles ou
+quantiles pour tout objet de classe <code>&lt;epiparameter&gt;</code>.
+Ils vous seront utiles en aval dans votre pipeline d’analyse !</p>
 <div id="le-double-point-virgule" class="callout checklist">
 <div class="callout-square">
 <i class="callout-icon" data-feather="check-square"></i>
@@ -463,13 +467,13 @@ aléatoires de la distribution donnée.</li>
 <div id="fonctions-pour-la-loi-normale" class="callout-inner">
 <h3 class="callout-title">Fonctions pour la loi normale</h3>
 <div class="callout-content">
-<p>Si vous en avez besoin, lisez en détail la rubrique <a href="https://sakai.unc.edu/access/content/group/3d1eb92e-7848-4f55-90c3-7c72a54e7e43/public/docs/lectures/lecture13.htm#probfunc" class="external-link">Fonctions
+<p>Si vous en avez besoin, lisez en détail la rubrique <a href="https://web.archive.org/web/20240210121034/https://sakai.unc.edu/access/content/group/3d1eb92e-7848-4f55-90c3-7c72a54e7e43/public/docs/lectures/lecture13.htm#probfunc" class="external-link">Fonctions
 de probabilité R pour la loinormale</a> Pour en savoir plus sur les
 fonctions de probabilité de la loi normale, lisez les définitions de
 chacune d’entre elles et identifiez la partie de la loi dans laquelle
 elles se situent !</p>
 <figure><img src="../fig/fig5a-normaldistribution.png" alt="Les quatre fonctions de probabilité de la loi normale (Jack Weiss, 2012)" class="figure mx-auto d-block"><div class="figcaption">Les quatre fonctions de probabilité de la loi
-normale (<a href="https://sakai.unc.edu/access/content/group/3d1eb92e-7848-4f55-90c3-7c72a54e7e43/public/docs/lectures/lecture13.htm#probfunc" class="external-link">Jack
+normale (<a href="https://web.archive.org/web/20240210121034/https://sakai.unc.edu/access/content/group/3d1eb92e-7848-4f55-90c3-7c72a54e7e43/public/docs/lectures/lecture13.htm#probfunc" class="external-link">Jack
 Weiss, 2012</a>)</div>
 </figure></div>
 </div>
@@ -484,9 +488,11 @@ accéder à chacune des valeurs ci-dessus pour n’importe quelle objet
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># plot this to have a visual reference</span></span>
-<span><span class="fu">plot</span><span class="op">(</span><span class="va">covid_serialint</span>, day_range <span class="op">=</span> <span class="fl">0</span><span class="op">:</span><span class="fl">20</span><span class="op">)</span></span></code></pre>
+<span></span>
+<span><span class="co"># continuous distribution</span></span>
+<span><span class="fu">plot</span><span class="op">(</span><span class="va">covid_serialint</span>, xlim <span class="op">=</span> <span class="fu">c</span><span class="op">(</span><span class="fl">0</span>, <span class="fl">20</span><span class="op">)</span><span class="op">)</span></span></code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb5">
+<figure><img src="../fig/delays-functions-rendered-unnamed-chunk-3-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div class="codewrapper sourceCode" id="cb5">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -503,7 +509,7 @@ accéder à chacune des valeurs ci-dessus pour n’importe quelle objet
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># the cumulative probability at quantile value of 10 (days)</span></span>
-<span><span class="fu">cdf</span><span class="op">(</span><span class="va">covid_serialint</span>, q <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></code></pre>
+<span><span class="fu">epiparameter</span><span class="fu">::</span><span class="fu">cdf</span><span class="op">(</span><span class="va">covid_serialint</span>, q <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">SORTIE<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -528,13 +534,13 @@ accéder à chacune des valeurs ci-dessus pour n’importe quelle objet
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># generate 10 random values (days) given</span></span>
 <span><span class="co"># the distribution family and its parameters</span></span>
-<span><span class="fu">generate</span><span class="op">(</span><span class="va">covid_serialint</span>, times <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></code></pre>
+<span><span class="fu">epiparameter</span><span class="fu">::</span><span class="fu">generate</span><span class="op">(</span><span class="va">covid_serialint</span>, times <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">SORTIE<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code> [1]  4.759338  6.289728  4.294399  2.739490  3.163588  4.367772  6.247139
- [8]  3.735905 20.076741  5.234137</code></pre>
+<pre class="output" tabindex="0"><code> [1] 4.134672 4.773449 1.172126 2.308758 2.659514 6.922529 5.379442 4.953638
+ [9] 4.830915 1.884930</code></pre>
 </div>
 <div id="accordionInstructor1" class="accordion instructor-note accordion-flush">
 <div class="accordion-item">
@@ -585,7 +591,7 @@ contacts jusqu’à 6 jours avant l’apparition de la maladie par rapport à
 </button>
 <div id="collapseHint1" class="accordion-collapse collapse" data-bs-parent="#accordionHint1" aria-labelledby="headingHint1">
 <div class="accordion-body">
-<p>Dans la figure 5 du <a href="https://sakai.unc.edu/access/content/group/3d1eb92e-7848-4f55-90c3-7c72a54e7e43/public/docs/lectures/lecture13.htm#probfunc" class="external-link">Fonctions
+<p>Dans la figure 5 du <a href="https://web.archive.org/web/20240210121034/https://sakai.unc.edu/access/content/group/3d1eb92e-7848-4f55-90c3-7c72a54e7e43/public/docs/lectures/lecture13.htm#probfunc" class="external-link">Fonctions
 de probabilité R pour la loi normale</a> la partie ombrée représente une
 probabilité cumulée de <code>0.997</code> pour la valeur du quantile à
 <code>x = 2</code>.</p>
@@ -610,7 +616,7 @@ probabilité cumulée de <code>0.997</code> pour la valeur du quantile à
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">cdf</span><span class="op">(</span><span class="va">covid_serialint</span>, q <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre>
+<code class="sourceCode R"><span><span class="fu">epiparameter</span><span class="fu">::</span><span class="fu">cdf</span><span class="op">(</span><span class="va">covid_serialint</span>, q <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">SORTIE<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -621,7 +627,7 @@ probabilité cumulée de <code>0.997</code> pour la valeur du quantile à
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">cdf</span><span class="op">(</span><span class="va">covid_serialint</span>, q <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span></code></pre>
+<code class="sourceCode R"><span><span class="fu">epiparameter</span><span class="fu">::</span><span class="fu">cdf</span><span class="op">(</span><span class="va">covid_serialint</span>, q <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">SORTIE<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -716,13 +722,10 @@ de masse de probabilité (FMP)</em>:</p>
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># continuous</span></span>
-<span><span class="fu">plot</span><span class="op">(</span><span class="va">covid_serialint</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># discrete</span></span>
+<code class="sourceCode R"><span><span class="co"># discrete distribution</span></span>
 <span><span class="fu">plot</span><span class="op">(</span><span class="va">covid_serialint_discrete</span><span class="op">)</span></span></code></pre>
 </div>
-<p>Pour obtenir enfin une <code>max</code>, accédons à la valeur du
+<figure><img src="../fig/delays-functions-rendered-unnamed-chunk-9-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>Pour obtenir enfin une <code>max</code>, accédons à la valeur du
 quantile du 99e percentile ou <code>0.99</code> de la distribution à
 l’aide de la fonction <code>prob_dist$q</code> de la même manière que
 nous accédons à les valeurs <code>summary_stats</code>.</p>
@@ -770,19 +773,19 @@ mêmes que celles que nous avons utilisées pour les distributions
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># plot to have a visual reference</span></span>
-<span><span class="fu">plot</span><span class="op">(</span><span class="va">covid_serialint_discrete</span>, day_range <span class="op">=</span> <span class="fl">0</span><span class="op">:</span><span class="fl">20</span><span class="op">)</span></span>
+<span><span class="fu">plot</span><span class="op">(</span><span class="va">covid_serialint_discrete</span>, xlim <span class="op">=</span> <span class="fu">c</span><span class="op">(</span><span class="fl">0</span>, <span class="fl">20</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># density value at quantile value 10 (day)</span></span>
 <span><span class="fu">density</span><span class="op">(</span><span class="va">covid_serialint_discrete</span>, at <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># cumulative probability at quantile value 10 (day)</span></span>
-<span><span class="fu">cdf</span><span class="op">(</span><span class="va">covid_serialint_discrete</span>, q <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
+<span><span class="fu">epiparameter</span><span class="fu">::</span><span class="fu">cdf</span><span class="op">(</span><span class="va">covid_serialint_discrete</span>, q <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># In what quantile value (days) do we have the 60% cumulative probability?</span></span>
 <span><span class="fu">quantile</span><span class="op">(</span><span class="va">covid_serialint_discrete</span>, p <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># generate random values</span></span>
-<span><span class="fu">generate</span><span class="op">(</span><span class="va">covid_serialint_discrete</span>, times <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></code></pre>
+<span><span class="fu">epiparameter</span><span class="fu">::</span><span class="fu">generate</span><span class="op">(</span><span class="va">covid_serialint_discrete</span>, times <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></code></pre>
 </div>
 </div>
 </div>
@@ -946,11 +949,14 @@ temps à l’aide du fonction <code>EpiNow2::epinow()</code>.</p>
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">epinow_estimates_cg</span> <span class="op">&lt;-</span> <span class="fu">epinow</span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="co"># Set 4 cores to be used in parallel computations</span></span>
+<span><span class="fu">withr</span><span class="fu">::</span><span class="fu">local_options</span><span class="op">(</span><span class="fu">list</span><span class="op">(</span>mc.cores <span class="op">=</span> <span class="fl">4</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">epinow_estimates_cg</span> <span class="op">&lt;-</span> <span class="fu">EpiNow2</span><span class="fu">::</span><span class="fu">epinow</span><span class="op">(</span></span>
 <span>  <span class="co"># cases</span></span>
 <span>  data <span class="op">=</span> <span class="va">example_confirmed</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">60</span><span class="op">]</span>,</span>
 <span>  <span class="co"># delays</span></span>
-<span>  generation_time <span class="op">=</span> <span class="fu">generation_time_opts</span><span class="op">(</span><span class="va">serial_interval_covid</span><span class="op">)</span></span>
+<span>  generation_time <span class="op">=</span> <span class="fu">EpiNow2</span><span class="fu">::</span><span class="fu">generation_time_opts</span><span class="op">(</span><span class="va">serial_interval_covid</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">base</span><span class="fu">::</span><span class="fu">plot</span><span class="op">(</span><span class="va">epinow_estimates_cg</span><span class="op">)</span></span></code></pre>
@@ -970,6 +976,19 @@ est une alternative qui peut propager un biais dans vos estimations,
 d’autant plus pour les maladies dont la transmission pré-symptomatique
 est signalée. (<a href="https://academic.oup.com/jid/article/224/10/1664/6356465" class="external-link">Chung
 Lau et al, 2021</a>)</p>
+</div>
+</div>
+</div>
+<div id="accordionInstructor2" class="accordion instructor-note accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor2" aria-expanded="false" aria-controls="collapseInstructor2">
+  <h3 class="accordion-header" id="headingInstructor2">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Remarque de l'instructeur </h3>
+</button>
+<div id="collapseInstructor2" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor2" aria-labelledby="headingInstructor2">
+<div class="accordion-body">
+<p>We can stop the livecoding at this stage and move on with the
+practical.</p>
+</div>
 </div>
 </div>
 </div>
@@ -1038,12 +1057,12 @@ d’aide<code>delay_opts()</code> sont analogues à l’argument
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">epinow_estimates</span> <span class="op">&lt;-</span> <span class="fu">epinow</span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">epinow_estimates</span> <span class="op">&lt;-</span> <span class="fu">EpiNow2</span><span class="fu">::</span><span class="fu">epinow</span><span class="op">(</span></span>
 <span>  <span class="co"># cases</span></span>
 <span>  reported_cases <span class="op">=</span> <span class="va">example_confirmed</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">60</span><span class="op">]</span>,</span>
 <span>  <span class="co"># delays</span></span>
-<span>  generation_time <span class="op">=</span> <span class="fu">generation_time_opts</span><span class="op">(</span><span class="va">covid_serial_interval</span><span class="op">)</span>,</span>
-<span>  delays <span class="op">=</span> <span class="fu">delay_opts</span><span class="op">(</span><span class="va">covid_incubation_time</span><span class="op">)</span></span>
+<span>  generation_time <span class="op">=</span> <span class="fu">EpiNow2</span><span class="fu">::</span><span class="fu">generation_time_opts</span><span class="op">(</span><span class="va">covid_serial_interval</span><span class="op">)</span>,</span>
+<span>  delays <span class="op">=</span> <span class="fu">EpiNow2</span><span class="fu">::</span><span class="fu">delay_opts</span><span class="op">(</span><span class="va">covid_incubation_time</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre>
 </div>
 </div>
@@ -1115,12 +1134,12 @@ d’aide<code>delay_opts()</code> sont analogues à l’argument
 <span><span class="co"># epinow ------------------------------------------------------------------</span></span>
 <span></span>
 <span><span class="co"># run epinow</span></span>
-<span><span class="va">epinow_estimates_cgi</span> <span class="op">&lt;-</span> <span class="fu">epinow</span><span class="op">(</span></span>
+<span><span class="va">epinow_estimates_cgi</span> <span class="op">&lt;-</span> <span class="fu">EpiNow2</span><span class="fu">::</span><span class="fu">epinow</span><span class="op">(</span></span>
 <span>  <span class="co"># cases</span></span>
 <span>  data <span class="op">=</span> <span class="va">example_confirmed</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">60</span><span class="op">]</span>,</span>
 <span>  <span class="co"># delays</span></span>
-<span>  generation_time <span class="op">=</span> <span class="fu">generation_time_opts</span><span class="op">(</span><span class="va">covid_serial_interval</span><span class="op">)</span>,</span>
-<span>  delays <span class="op">=</span> <span class="fu">delay_opts</span><span class="op">(</span><span class="va">covid_incubation_time</span><span class="op">)</span></span>
+<span>  generation_time <span class="op">=</span> <span class="fu">EpiNow2</span><span class="fu">::</span><span class="fu">generation_time_opts</span><span class="op">(</span><span class="va">covid_serial_interval</span><span class="op">)</span>,</span>
+<span>  delays <span class="op">=</span> <span class="fu">EpiNow2</span><span class="fu">::</span><span class="fu">delay_opts</span><span class="op">(</span><span class="va">covid_incubation_time</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">base</span><span class="fu">::</span><span class="fu">plot</span><span class="op">(</span><span class="va">epinow_estimates_cgi</span><span class="op">)</span></span></code></pre>
@@ -1289,12 +1308,12 @@ d’incubation).</li>
 <span><span class="co"># epinow ------------------------------------------------------------------</span></span>
 <span></span>
 <span><span class="co"># run epinow</span></span>
-<span><span class="va">epinow_estimates_egi</span> <span class="op">&lt;-</span> <span class="fu">epinow</span><span class="op">(</span></span>
+<span><span class="va">epinow_estimates_egi</span> <span class="op">&lt;-</span> <span class="fu">EpiNow2</span><span class="fu">::</span><span class="fu">epinow</span><span class="op">(</span></span>
 <span>  <span class="co"># cases</span></span>
 <span>  data <span class="op">=</span> <span class="va">ebola_confirmed</span>,</span>
 <span>  <span class="co"># delays</span></span>
-<span>  generation_time <span class="op">=</span> <span class="fu">generation_time_opts</span><span class="op">(</span><span class="va">serial_interval_ebola</span><span class="op">)</span>,</span>
-<span>  delays <span class="op">=</span> <span class="fu">delay_opts</span><span class="op">(</span><span class="va">incubation_period_ebola</span><span class="op">)</span></span>
+<span>  generation_time <span class="op">=</span> <span class="fu">EpiNow2</span><span class="fu">::</span><span class="fu">generation_time_opts</span><span class="op">(</span><span class="va">serial_interval_ebola</span><span class="op">)</span>,</span>
+<span>  delays <span class="op">=</span> <span class="fu">EpiNow2</span><span class="fu">::</span><span class="fu">delay_opts</span><span class="op">(</span><span class="va">incubation_period_ebola</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">plot</span><span class="op">(</span><span class="va">epinow_estimates_egi</span><span class="op">)</span></span></code></pre>
@@ -1475,12 +1494,12 @@ Parameters:
 <span>  <span class="fu">select</span><span class="op">(</span><span class="va">date</span>, confirm <span class="op">=</span> <span class="va">in_bed</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Run epinow()</span></span>
-<span><span class="va">epinow_estimates_igi</span> <span class="op">&lt;-</span> <span class="fu">epinow</span><span class="op">(</span></span>
+<span><span class="va">epinow_estimates_igi</span> <span class="op">&lt;-</span> <span class="fu">EpiNow2</span><span class="fu">::</span><span class="fu">epinow</span><span class="op">(</span></span>
 <span>  <span class="co"># cases</span></span>
 <span>  data <span class="op">=</span> <span class="va">influenza_cleaned</span>,</span>
 <span>  <span class="co"># delays</span></span>
-<span>  generation_time <span class="op">=</span> <span class="fu">generation_time_opts</span><span class="op">(</span><span class="va">generation_time_influenza</span><span class="op">)</span>,</span>
-<span>  delays <span class="op">=</span> <span class="fu">delay_opts</span><span class="op">(</span><span class="va">incubation_time_influenza</span><span class="op">)</span></span>
+<span>  generation_time <span class="op">=</span> <span class="fu">EpiNow2</span><span class="fu">::</span><span class="fu">generation_time_opts</span><span class="op">(</span><span class="va">generation_time_influenza</span><span class="op">)</span>,</span>
+<span>  delays <span class="op">=</span> <span class="fu">EpiNow2</span><span class="fu">::</span><span class="fu">delay_opts</span><span class="op">(</span><span class="va">incubation_time_influenza</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">plot</span><span class="op">(</span><span class="va">epinow_estimates_igi</span><span class="op">)</span></span></code></pre>
@@ -1616,9 +1635,9 @@ any links that you are not going to use.
   "creativeWorkStatus": "active",
   "url": "https://epiverse-trace.github.io/tutorials-middle-fr/instructor/delays-functions.html",
   "identifier": "https://epiverse-trace.github.io/tutorials-middle-fr/instructor/delays-functions.html",
-  "dateCreated": "2025-10-01",
-  "dateModified": "2025-09-24",
-  "datePublished": "2025-10-07"
+  "dateCreated": "2025-10-08",
+  "dateModified": "2025-10-08",
+  "datePublished": "2025-10-08"
 }
 
   </script><script>
