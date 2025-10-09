@@ -56,7 +56,6 @@ covid_serialint <-
   epiparameter::epiparameter_db(
     disease = "covid",
     epi_name = "serial",
-    author = "Nishiura",
     single_epiparameter = TRUE
   )
 ```
@@ -152,8 +151,8 @@ epiparameter::generate(covid_serialint, times = 10)
 ```
 
 ``` output
- [1] 4.134672 4.773449 1.172126 2.308758 2.659514 6.922529 5.379442 4.953638
- [9] 4.830915 1.884930
+ [1] 9.308061 2.510654 6.085556 3.305351 4.522049 4.436497 3.331934 7.850121
+ [9] 3.323554 3.895433
 ```
 
 ::::::::: instructor
@@ -527,7 +526,6 @@ covid_serialint <-
   epiparameter::epiparameter_db(
     disease = "covid",
     epi_name = "serial",
-    author = "Nishiura",
     single_epiparameter = TRUE
   )
 
@@ -552,7 +550,6 @@ covid_serial_interval <-
 covid_incubation <- epiparameter::epiparameter_db(
   disease = "covid",
   epi_name = "incubation",
-  author = "Natalie",
   single_epiparameter = TRUE
 )
 
