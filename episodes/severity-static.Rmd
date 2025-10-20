@@ -427,8 +427,8 @@ En interne, la fonction `cfr::estimate_outcomes()` effectue ce calcul :
 ```{r}
 cfr::estimate_outcomes(
   data = ebola_30days,
-  delay_density = function(x) density(onset_to_death_ebola, at = x))
- %>%
+  delay_density = function(x) density(onset_to_death_ebola, at = x)
+) %>%
   slice_head(n = 3) %>%
   pull(estimated_outcomes)
 ```
