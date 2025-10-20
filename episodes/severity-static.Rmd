@@ -810,9 +810,9 @@ Estimez le RL ajusté au délai en utilisant la distribution de délai correspon
 
 Le réorganisation des données d'entrée durant le processus d'analyse des données peut prendre beaucoup de temps. Pour obtenir des *données d'incidence agrégées* prêtes à être analysées nous vous encourageons à utiliser le package `{incidence2}`.
 
-Tout d'abord, consultez la vignette [Get started](https://www.reconverse.org/incidence2/doc/incidence2.html) de la librairie `{incidence2}` pour savoir comment utiliser l'argument `date_index` lors de la lecture d'un linelist contenant plusieurs colonnes de type <Date>.
+Tout d'abord, consultez la vignette [Get started](https://www.reconverse.org/incidence2/doc/incidence2.html) de la librairie `{incidence2}` pour savoir comment utiliser l'argument `date_index` lors de la lecture d'un linelist contenant plusieurs colonnes de type `<Date>`.
 
-Ensuite, référez-vous [au manuel de référence](https://epiverse-trace.github.io/cfr/reference/prepare_data.html) sur la façon d'utiliser la fonction `cfr::prepare_data()` sur les objets de classe <incidence2>.
+Ensuite, référez-vous [au manuel de référence](https://epiverse-trace.github.io/cfr/reference/prepare_data.html) sur la façon d'utiliser la fonction `cfr::prepare_data()` sur les objets de classe `<incidence2>`.
 
 <!-- cite howto entry one lineslist + incidence2 + cfr connection -->
 
