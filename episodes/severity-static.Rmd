@@ -64,7 +64,7 @@ Nous pouvons évaluer le potentiel pandémique d'une épidémie à l'aide de deu
 ([Fraser et al. 2009](https://www.science.org/doi/full/10.1126/science.1176062),
 [CDC, 2016](https://www.cdc.gov/flu/pandemic-resources/national-strategy/severity-assessment-framework-508.html)).
 
-![Scénarios de planification pandémique du HHS basés sur le cadre d'évaluation de la gravité de la pandémie. Ce cadre utilise une mesure combinant la gravité clinique et la transmissibilité pour caractériser les scénarios de pandémie de grippe. **HHS**: United States Department of Health and Human Services ([CDC, 2016](https://www.cdc.gov/flu/pandemic-resources/national-strategy/severity-assessment-framework-508.html))](fig/cfr-hhs-scenarios-psaf.png){alt='L'axe horizontal représente la mesure de la gravité clinique, échelonnée de 1 à 7, où 1 correspond à faible, 4 à modérée et 7 à très grave. L'axe vertical représente la mesure de la transmissibilité, échelonnée de 1 à 5, où 1 correspond à faible, 3 à modérée et 5 à forte transmissibilité. Sur le graphique, les scénarios de planification d'une pandémie sont présentés en quatre quadrants (A, B, C et D). De gauche à droite, les scénarios sont: “variation saisonnière”, “pandémie modérée”, “pandémie grave” et “pandémie très grave”. À mesure que la gravité clinique augmente sur l'axe horizontal, ou que la transmissibilité augmente sur l'axe vertical, la gravité du scénario de planification de la pandémie augmente également.'}
+![Scénarios de planification pandémique du HHS basés sur le cadre d'évaluation de la gravité de la pandémie. Ce cadre utilise une mesure combinant la gravité clinique et la transmissibilité pour caractériser les scénarios de pandémie de grippe. **HHS**: United States Department of Health and Human Services ([CDC, 2016](https://www.cdc.gov/flu/pandemic-resources/national-strategy/severity-assessment-framework-508.html))](fig/cfr-hhs-scenarios-psaf.png){alt='L axe horizontal représente la mesure de la gravité clinique, échelonnée de 1 à 7, où 1 correspond à faible, 4 à modérée et 7 à très grave. L axe vertical représente la mesure de la transmissibilité, échelonnée de 1 à 5, où 1 correspond à faible, 3 à modérée et 5 à forte transmissibilité. Sur le graphique, les scénarios de planification d une pandémie sont présentés en quatre quadrants (A, B, C et D). De gauche à droite, les scénarios sont: “variation saisonnière”, “pandémie modérée”, “pandémie grave” et “pandémie très grave”. À mesure que la gravité clinique augmente sur l axe horizontal, ou que la transmissibilité augmente sur l axe vertical, la gravité du scénario de planification de la pandémie augmente également.'}
 
 Une approche épidémiologique pour estimer la gravité clinique consiste à quantifier le risque de létalité (RL). Le risque de létalité est la probabilité conditionnelle de décès en cas de diagnostic confirmé, calculée comme le rapport entre le nombre cumulé de décès dus à une maladie infectieuse et le nombre de
 cas diagnostiqués confirmés. Toutefois, le calcule de ce paramètre de cette façon au cours d'une épidémie tend à aboutir à un RL naïf ou biaisé, compte tenu du [délai](../../../learners/reference.md#delaydist) entre l'apparition de la maladie et le décès, qui varie considérablement au fur et à mesure que l'épidémie progresse et se stabilise aux derniers stades de l'épidémie ([Ghani et al. 2005](https://academic.oup.com/aje/article/162/5/479/82647?login=false#620743)).
@@ -190,6 +190,12 @@ Cependant, il faut noter que la version actuelle de `{cfr}` requière des donné
 
 ::::::::::::::::::
 
+:::::::::::: checklist
+
+Lorsque vous regroupez les cas par jour avec `{incidence2}`, vous pouvez adapter les données pour `{cfr}` à l'aide de `cfr::prepare_data()` sur les objets `<incidence2>`. Pour plus de détails et un exemple, consultez le manuel de référence `{cfr}` sur la préparation des formats de données épidémiologiques courants pour l'estimation du CFR (https://epiverse-trace.github.io/cfr/reference/prepare_data.html).
+
+::::::::::::
+
 La fonction `cfr::cfr_static()` permet de calculer le RL naïf.
 
 ```{r}
@@ -310,7 +316,7 @@ Vous trouverez plus d'informations concernant l'effet des délais dans l'estimat
 
 [Nishiura et al, 2009](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0006852) ont développé une méthode de calcul du RL qui prend en compte les **délais** entre l'apparition des symptômes et le décès.
 
-Durant certaines phases d'une épidémie en cours, il peut arriver que le nombre de décès soit insuffisant pour déterminer la distribution du temps entre l'apparition des symptômes et le décès. Par conséquent, nous pouvons obtenir une estimation de la *distribution de ce délai* à partir d'épidémies antérieures ou en réutilisant celles qui sont accessibles via des librairies R tels que `{epiparameter}` ou `{epireview}` qui les collectent à partir de la littérature scientifique publiée. Lisez l'épisode [accéder aux délais épidémiologiques](https://epiverse-trace.github.io/tutorials-early/delays-reuse.html) de ce tutoriel pour de plus amples informations.
+Durant certaines phases d'une épidémie en cours, il peut arriver que le nombre de décès soit insuffisant pour déterminer la distribution du temps entre l'apparition des symptômes et le décès. Par conséquent, nous pouvons obtenir une estimation de la *distribution de ce délai* à partir d'épidémies antérieures ou en réutilisant celles qui sont accessibles via des librairies R tels que `{epiparameter}` ou `{epireview}` qui les collectent à partir de la littérature scientifique publiée. Lisez l'épisode [accéder aux délais épidémiologiques](../episodes/delays-access.md) de ce tutoriel pour de plus amples informations.
 
 Obtenons la distribution du délai entre la date d'apparition des symptômes et la
 date de décès via la librairie `{epiparameter}`.
@@ -324,7 +330,7 @@ onset_to_death_ebola <- epiparameter::epiparameter_db(
 )
 
 # visualiser la distribution du délai
-plot(onset_to_death_ebola, day_range = 0:40)
+plot(onset_to_death_ebola, xlim = c(0, 40))
 ```
 
 Pour prendre en compte la distribution du délai lors du calcul le RL ajusté au délai, nous devons fournir à l'arguemt `delay_density` de la fonction `cfr::cfr_static()` la valeur correspondante.
@@ -350,6 +356,85 @@ out_high <- out_delay_adjusted %>% dplyr::pull(severity_high)
 
 Le RL ajusté au délai indique que la gravité globale de la maladie *à la fin de l'épidémie* ou selon les *récentes données disponibles à ce moment-là* est `r out_estimate` avec un intervalle de confiance de 95% entre `r out_low` et `r out_high`, légèrement supérieure à la valeur naïve.
 
+:::::::::::::::::: spoiler
+
+### Pourquoi density() est-elle exprimée comme une fonction de x ?
+
+Pour corriger le biais résultant des cas dont les résultats ne sont pas encore connus au moment de l'estimation, {cfr} tient compte de la probabilité que le résultat d'un cas soit connu après un certain délai.
+
+Pour ce faire, il relie $D_t$ à la fonction d'incidence $c_t$ (c'est-à-dire le nombre de nouveaux cas confirmés au jour t) et à la fonction de densité de probabilité conditionnelle $f_s$ du temps écoulé entre l'apparition de la maladie et le décès, étant donné le décès.
+
+$$
+D_t = p_t \times \sum_{i = 0}^t\sum_{j = 0}^\infty c_i f_{j - i}
+$$
+
+Ici, $D_t$ est le nombre cumulé de décès jusqu'au moment t, et $p_t$ est la proportion réalisée de cas confirmés qui décèdent des suites de l'infection (c'est-à-dire le risque de létalité non biaisé, ou CFR) .
+
+Le terme $\sum_{i = 0}^t\sum_{j = 0}^\infty c_i f_{j - i}$ représente le **nombre total prévu de cas dont l'issue est connue au moment `t`**. Il additionne tous les cas incidents $c_i$, chacun pondéré par la fonction de densité de probabilité $f_{j−i}$ que leur issue soit connue après un délai de $j−i$ jours.
+
+Chaque jour d'analyse, `{cfr}` calcule, pour chaque cas, le **nombre attendu de résultats à l'instant `t`**. Lorsque vous utilisez des objets de classe `<epiparameter>`, la fonction `density()` peut être appliquée pour obtenir la fonction de densité de probabilité correspondante pour chaque cas et chaque jour.
+
+Par exemple, au jour 1, les résultats attendus sont égaux à :
+
+- le nombre de cas observés au jour 1 multiplié par la densité au jour 0.
+
+```{r}
+# Au jour 1, les résultats attendus sont :
+ebola_30days$cases[1] *
+  density(onset_to_death_ebola, at = 0)
+```
+
+Au jour 2, les résultats attendus sont égaux à :
+
+- le nombre de cas observés au jour 1 multiplié par la densité au jour 1, plus
+- le nombre de cas observés au jour 2 multiplié par la densité au jour 0
+
+```{r}
+# Au jour 2, les résultats attendus sont les suivants :
+ebola_30days$cases[1] *
+  density(onset_to_death_ebola, at = 1) +
+  ebola_30days$cases[2] *
+    density(onset_to_death_ebola, at = 0)
+```
+
+Au troisième jour, les résultats attendus sont égaux à :
+
+- le nombre de cas observés au premier jour multiplié par la densité au deuxième jour, plus
+- le nombre de cas observés au deuxième jour multiplié par la densité au premier jour, plus
+- le nombre de cas observés au troisième jour multiplié par la densité au jour 0.
+
+```{r}
+# Au troisième jour, les résultats attendus sont :
+ebola_30days$cases[1] *
+  density(onset_to_death_ebola, at = 2) +
+  ebola_30days$cases[2] *
+    density(onset_to_death_ebola, at = 1) +
+  ebola_30days$cases[3] *
+    density(onset_to_death_ebola, at = 0)
+```
+
+Notez que les cas observés les plus récemment commencent la distribution des délais à partir de `0`, les autres continuent avec le jour suivant.
+
+Étant donné que la valeur d'entrée dans `at` varie selon le jour pour chaque cas (`at = 0`, `at = 1`, `at = 2`, ...), la fonction `density()` doit être exprimée en fonction de x. `{cfr}` tirera alors les valeurs en conséquence, comme indiqué ci-dessous :
+
+```r
+# {cfr} utilise la densité de la distribution à différentes valeurs de x
+function(x) density(onset_to_death_ebola, at = x)
+```
+
+En interne, la fonction `cfr::estimate_outcomes()` effectue ce calcul :
+
+```{r}
+cfr::estimate_outcomes(
+  data = ebola_30days,
+  delay_density = function(x) density(onset_to_death_ebola, at = x))
+ %>%
+  slice_head(n = 3) %>%
+  pull(estimated_outcomes)
+```
+
+::::::::::::::::::
+
 :::::::::::::::::: callout
 
 ### Utilisation des objets de la classe epiparameter
@@ -363,6 +448,24 @@ Pour les fonctions de distribution dont les paramètres ne sont pas disponibles 
 - Créer un objet de la classe `<epiparameter>` pour l'intégrer dans d'autres packages R d'un pipeline d'analyse épidémiologique. Lisez l'article [document de référence de `epiparameter::epiparameter()`](https://epiverse-trace.github.io/epiparameter/reference/epiparameter.html) pour plus de clarifications.
 
 - Liser la vignette de `{cfr}` portant sur [l'utilisation des distributions des délais](https://epiverse-trace.github.io/cfr/articles/delay_distributions.html).
+
+::::::::::::::::::
+
+:::::::::::::::::: spoiler
+
+### Quand doit-on utiliser les distributions discrètes ?
+
+Pour la fonction `cfr_static()` et les autres de la famille `cfr_*()`, les distributions les plus appropriées sont les **distributions discrets**. Ceci en raison du fait que nous travaillerons avec des données d'incidence quotidiennes sur le nombre de cas et de décès.
+
+Nous pouvons supposer que l'évaluation de la fonction de distribution de probabilité (FDP) d'une distribution *continue* est équivalente à la fonction de masse de probabilité (FMP) de la distribution *discrète* correspondante.
+
+Toutefois, cette hypothèse pourrait être inappropriée en présence de distributions présentant des pics énormes. C'est le cas, par exemple, des maladies dont la distribution du délai entre la date d'apparition des symptômes et la date du décès présente un pic très élevé et une faible variance. Dans ce cas, la disparité moyenne entre la FDP et la FMP devrait être plus prononcée que pour les distributions avec de larges variances. Une façon d'y remédier est de discrétiser la distribution continue en appliquant la fonction `epiparameter::discretise()` à un objet de la classe `<epiparameter>`.
+
+```{r}
+onset_to_death_ebola %>%
+  epiparameter::discretise() %>%
+  plot(xlim = c(0, 40))
+```
 
 ::::::::::::::::::
 
@@ -433,18 +536,6 @@ Comparer et interpréter les estimations du RL naïfs et ajusté au délais.
 ::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::::::
-
-:::::::::::::::::: spoiler
-
-### Quand doit-on utiliser les distributions discrètes ?
-
-Pour la fonction `cfr_static()` et les autres de la famille `cfr_*()`, les distributions les plus appropriées sont les **distributions discrets**. Ceci en raison du fait que nous travaillerons avec des données d'incidence quotidiennes sur le nombre de cas et de décès.
-
-Nous pouvons supposer que l'évaluation de la fonction de distribution de probabilité (FDP) d'une distribution *continue* est équivalente à la fonction de masse de probabilité (FMP) de la distribution *discrète* correspondante.
-
-Toutefois, cette hypothèse pourrait être inappropriée en présence de distributions présentant des pics énormes. C'est le cas, par exemple, des maladies dont la distribution du délai entre la date d'apparition des symptômes et la date du décès présente un pic très élevé et une faible variance. Dans ce cas, la disparité moyenne entre la FDP et la FMP devrait être plus prononcée que pour les distributions avec de larges variances. Une façon d'y remédier est de discrétiser la distribution continue en appliquant la fonction `epiparameter::discretise()` à un objet de la classe `<epiparameter>`.
-
-::::::::::::::::::
 
 ::::::::::::::::::::::::::: spoiler
 
@@ -581,7 +672,7 @@ Nous pouvons soit inspecter visuellement ou analyser les tableaux des données d
 
 ::::::::::::::::::::::
 
-:::::::::::::::::::::: solution
+:::::::::::::::::::::: instructor
 
 Il y a presque un mois de différence.
 
@@ -719,7 +810,7 @@ Estimez le RL ajusté au délai en utilisant la distribution de délai correspon
 
 Le réorganisation des données d'entrée durant le processus d'analyse des données peut prendre beaucoup de temps. Pour obtenir des *données d'incidence agrégées* prêtes à être analysées nous vous encourageons à utiliser le package `{incidence2}`.
 
-Tout d'abord, consultez la vignette [Get started](https://www.reconverse.org/incidence2/articles/incidence2.html) de la librairie `{incidence2}` pour savoir comment utiliser l'argument `date_index` lors de la lecture d'un linelist contenant plusieurs colonnes de type <Date>.
+Tout d'abord, consultez la vignette [Get started](https://www.reconverse.org/incidence2/doc/incidence2.html) de la librairie `{incidence2}` pour savoir comment utiliser l'argument `date_index` lors de la lecture d'un linelist contenant plusieurs colonnes de type <Date>.
 
 Ensuite, référez-vous [au manuel de référence](https://epiverse-trace.github.io/cfr/reference/prepare_data.html) sur la façon d'utiliser la fonction `cfr::prepare_data()` sur les objets de classe <incidence2>.
 
