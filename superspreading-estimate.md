@@ -119,7 +119,7 @@ Avec l'argument `directed = TRUE` nous configurons un graphe orienté. Ces direc
 
 ``` r
 # visualise contact network
-epicontacts::vis_epicontacts(epi_contacts)
+plot(epi_contacts)
 ```
 
 <img src="fig/superspreading-estimate-rendered-unnamed-chunk-5-1.png" style="display: block; margin: auto;" />
@@ -319,7 +319,7 @@ Calculez la distribution des cas secondaires d'Ebola à l'aide de la méthode de
 :::::::::::::::::: hint
 
 ⚠️ 
- **Étape facultative :** Cet ensemble de données a 5829 cas. Exécution `epicontacts::vis_epicontacts()` peut prendre plusieurs minutes et utiliser beaucoup de mémoire pour les grandes épidémies telles que la liste des cas d'Ebola. Si vous utilisez un ordinateur plus ancien ou plus lent, vous pouvez sauter cette étape.
+ **Étape facultative :** Cet ensemble de données a 5829 cas. Exécution `plot(<epicontacts>)` peut prendre plusieurs minutes et utiliser beaucoup de mémoire pour les grandes épidémies telles que la liste des cas d'Ebola. Si vous utilisez un ordinateur plus ancien ou plus lent, vous pouvez sauter cette étape.
 
 ::::::::::::::::::
 
