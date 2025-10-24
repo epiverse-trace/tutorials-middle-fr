@@ -23,15 +23,33 @@ exercises: 2
 
 ::::::::::::::::::::::::::::::::::::: prereq
 
-## Conditions préalables
-
 Les apprenants doivent se familiariser avec les concepts suivants avant de suivre ce tutoriel :
 
 **Statistiques**: distributions de probabilités courantes, en particulier Poisson et binôme négatif.
 
 **Théorie épidémique** Le nombre de reproduction, R.
 
+**R packages installés**: `{epicontacts}`, `{fitdistrplus}`, `{superspreading}`, `{outbreaks}`, `{tidyverse}`.
+
 :::::::::::::::::::::::::::::::::
+
+:::::::::::::: spoiler
+
+Installer les packages si elles ne le sont pas déjà:
+
+
+``` r
+# si {pak} n'est pas disponible, exécutez : install.packages("pak")
+pak::pak("epicontacts")
+pak::pak("fitdistrplus")
+pak::pak("superspreading")
+pak::pak("outbreaks")
+pak::pak("tidyverse")
+```
+
+Si vous recevez un message d'erreur, rendez-vous sur la [page principale de configuration](../learners/setup.md#configuration-des-logiciels).
+
+::::::::::::::
 
 ## Introduction
 
@@ -104,7 +122,7 @@ Avec l'argument `directed = TRUE` nous configurons un graphe orienté. Ces direc
 epicontacts::vis_epicontacts(epi_contacts)
 ```
 
-<img src="fig/superspreading-estimate-rendered-unnamed-chunk-4-1.png" style="display: block; margin: auto;" />
+<img src="fig/superspreading-estimate-rendered-unnamed-chunk-5-1.png" style="display: block; margin: auto;" />
 
 ::::::::::::::::::::::::::: spoiler
 
@@ -253,7 +271,7 @@ all_secondary_cases %>%
   )
 ```
 
-<img src="fig/superspreading-estimate-rendered-unnamed-chunk-8-1.png" style="display: block; margin: auto;" />
+<img src="fig/superspreading-estimate-rendered-unnamed-chunk-9-1.png" style="display: block; margin: auto;" />
 
 Le nombre de cas secondaires peut être utilisé pour estimer de manière empirique la **distribution de la descendance** qui est le nombre de cas *secondaires* causées par chaque cas. Une distribution statistique candidate utilisée pour modéliser la distribution de la descendance est la distribution **binomiale négative** avec deux paramètres :
 
@@ -261,7 +279,7 @@ Le nombre de cas secondaires peut être utilisé pour estimer de manière empiri
 
 - **Dispersion** exprimée par $k$ qui représente la variation au niveau individuel de la transmission par des individus isolés.
 
-<img src="fig/superspreading-estimate-rendered-unnamed-chunk-9-1.png" style="display: block; margin: auto;" />
+<img src="fig/superspreading-estimate-rendered-unnamed-chunk-10-1.png" style="display: block; margin: auto;" />
 
 L'histogramme et le diagramme de densité montrent que la distribution de la descendance est fortement asymétrique, soit **surdispersée**. Dans ce cadre, les événements de surdispersion (ESS) ne sont pas arbitraires ou exceptionnels, mais simplement des réalisations de la queue droite de la distribution de la descendance, que nous pouvons quantifier et analyser ([Lloyd-Smith et al., 2005](https://www.nature.com/articles/nature04153)).
 
@@ -335,7 +353,7 @@ ebola_secondary %>%
   )
 ```
 
-<img src="fig/superspreading-estimate-rendered-unnamed-chunk-10-1.png" style="display: block; margin: auto;" />
+<img src="fig/superspreading-estimate-rendered-unnamed-chunk-11-1.png" style="display: block; margin: auto;" />
 
 D'après une inspection visuelle, la distribution des cas secondaires pour l'ensemble des données relatives à Ebola en `ebola_sim_clean` montre une distribution asymétrique avec des cas secondaires inférieurs ou égaux à 6. Nous devons compléter cette observation par une analyse statistique afin d'évaluer la surdispersion.
 
@@ -388,7 +406,7 @@ A partir de la `{fitdistrplus}` sortie :
 
 Nous pouvons superposer les valeurs de densité estimées de la distribution binomiale négative ajustée et l'histogramme du nombre de cas secondaires :
 
-<img src="fig/superspreading-estimate-rendered-unnamed-chunk-13-1.png" style="display: block; margin: auto;" />
+<img src="fig/superspreading-estimate-rendered-unnamed-chunk-14-1.png" style="display: block; margin: auto;" />
 
 :::::::::::::::::::: callout
 
