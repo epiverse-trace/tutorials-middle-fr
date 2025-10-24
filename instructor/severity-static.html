@@ -407,7 +407,7 @@ R.</p>
 <button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler1" aria-expanded="false" aria-controls="collapseSpoiler1">
   <h3 class="accordion-header" id="headingSpoiler1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Afficher les détails </h3>
 </button>
-<div id="collapseSpoiler1" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler1" aria-labelledby="headingSpoiler1">
+<div id="collapseSpoiler1" class="accordion-collapse collapse" aria-labelledby="headingSpoiler1" data-bs-parent="#accordionSpoiler1">
 <div class="accordion-body">
 <p>Installer les packages si elles ne le sont pas déjà:</p>
 <div class="codewrapper sourceCode" id="cb1">
@@ -476,7 +476,7 @@ et al., 2009</a>)</div>
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
   <h3 class="accordion-header" id="headingInstructor1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Remarque de l'instructeur </h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
 <div class="accordion-body">
 <p>Les périodes sont pertinentes : Période 1 – 15 jours où le RL est
 nul, ce qui indique qu’aucun décès n’a été signalé ; Période du 15 mars
@@ -717,7 +717,7 @@ importez-le dans R. Puis estimez le RL naïf.</p>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint1" aria-expanded="false" aria-controls="collapseHint1">
   <h4 class="accordion-header" id="headingHint1"> Donner un indice </h4>
 </button>
-<div id="collapseHint1" class="accordion-collapse collapse" data-bs-parent="#accordionHint1" aria-labelledby="headingHint1">
+<div id="collapseHint1" class="accordion-collapse collapse" aria-labelledby="headingHint1" data-bs-parent="#accordionHint1">
 <div class="accordion-body">
 <p>Vérifier le format des données d’entrée en répondant aux questions
 suivantes:</p>
@@ -734,7 +734,7 @@ fonction <code>cfr_static()</code> ?</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Montrer la solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>Importez les données téléchargées à l’aide de la fonction
 <code>readr::read_csv()</code>. Cette fonction reconnaît que la colonne
@@ -820,7 +820,7 @@ l’estimation du RL (et comment y remédier) :</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> 1. Études préférentielle des cas graves </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>Pour les maladies ayant un <em>spectre</em> de présentations
 cliniques, les cas qui sont portés à l’attention des autorités de santé
@@ -841,7 +841,7 @@ asymptomatiques.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> 2. Biais dû à une déclaration tardive du décès </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <p>Lors d’une épidémie <em>en cours</em>, il y a un délai entre le
 moment où une personne décède et le moment où son décès est signalé. Par
@@ -867,7 +867,7 @@ utilisant la librairie <a href="https://github.com/epiverse-trace/cfr" class="ex
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4"> Étude de cas : Grippe A (H1N1), Mexique, 2009 </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
 <div class="accordion-body">
 <p>Il est crucial d’améliorer l’estimation du RL ajusté au délais au
 début d’une épidémie pour déterminer sa virulence, mais aussi le niveau
@@ -898,7 +898,7 @@ informatives du taux de létalité.</p>
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor2" aria-expanded="false" aria-controls="collapseInstructor2">
   <h3 class="accordion-header" id="headingInstructor2">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Remarque de l'instructeur </h3>
 </button>
-<div id="collapseInstructor2" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor2" aria-labelledby="headingInstructor2">
+<div id="collapseInstructor2" class="accordion-collapse collapse" aria-labelledby="headingInstructor2" data-bs-parent="#accordionInstructor2">
 <div class="accordion-body">
 <p>Vous trouverez plus d’informations concernant l’effet des délais dans
 l’estimation du RL dans cette section de la <a href="https://epiverse-trace.github.io/cfr/articles/cfr.html#concept-how-reporting-delays-bias-cfr-estimates" class="external-link">vignette
@@ -1009,7 +1009,7 @@ adéquate.</li>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint2" aria-expanded="false" aria-controls="collapseHint2">
   <h4 class="accordion-header" id="headingHint2"> Donner un indice </h4>
 </button>
-<div id="collapseHint2" class="accordion-collapse collapse" data-bs-parent="#accordionHint2" aria-labelledby="headingHint2">
+<div id="collapseHint2" class="accordion-collapse collapse" aria-labelledby="headingHint2" data-bs-parent="#accordionHint2">
 <div class="accordion-body">
 <ul><li>Trouver l’objet de la classe <code>&lt;epiparameter&gt;</code>
 approprié pour ces données.</li>
@@ -1022,7 +1022,7 @@ approprié pour ces données.</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution5" aria-expanded="false" aria-controls="collapseSolution5">
   <h4 class="accordion-header" id="headingSolution5"> Montrer la solution </h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
+<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
 <div class="accordion-body">
 <p>Nous utiliserons la librairie <a href="https://github.com/epiverse-trace/epiparameter/" class="external-link">epiparameter</a> pour
 accéder à une distribution des délais pour les données d’incidence du
@@ -1111,7 +1111,7 @@ délais.</p>
 <button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler2" aria-expanded="false" aria-controls="collapseSpoiler2">
   <h3 class="accordion-header" id="headingSpoiler2">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Quand doit-on utiliser les distributions discrètes ? </h3>
 </button>
-<div id="collapseSpoiler2" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler2" aria-labelledby="headingSpoiler2">
+<div id="collapseSpoiler2" class="accordion-collapse collapse" aria-labelledby="headingSpoiler2" data-bs-parent="#accordionSpoiler2">
 <div class="accordion-body">
 <p>Pour la fonction <code>cfr_static()</code> et les autres de la
 famille <code>cfr_*()</code>, les distributions les plus appropriées
@@ -1141,7 +1141,7 @@ distribution continue en appliquant la fonction
 <button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler3" aria-expanded="false" aria-controls="collapseSpoiler3">
   <h3 class="accordion-header" id="headingSpoiler3">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Comment fonctionne la librairie {cfr} ? </h3>
 </button>
-<div id="collapseSpoiler3" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler3" aria-labelledby="headingSpoiler3">
+<div id="collapseSpoiler3" class="accordion-collapse collapse" aria-labelledby="headingSpoiler3" data-bs-parent="#accordionSpoiler3">
 <div class="accordion-body">
 <p>Pour ajuster le RL, <a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0006852" class="external-link">Nishiura
 et al. 2009</a> ont utilisé les incidences des cas et des décès pour
@@ -1311,7 +1311,7 @@ données relatives à l’épidémie de SARS survenue à Hong Kong en 2003.</p>
 <button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler4" aria-expanded="false" aria-controls="collapseSpoiler4">
   <h3 class="accordion-header" id="headingSpoiler4">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Étude de cas : Épidémie de SARS, Hong Kong, 2003 </h3>
 </button>
-<div id="collapseSpoiler4" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler4" aria-labelledby="headingSpoiler4">
+<div id="collapseSpoiler4" class="accordion-collapse collapse" aria-labelledby="headingSpoiler4" data-bs-parent="#accordionSpoiler4">
 <div class="accordion-body">
 <p>Les figures A et B montrent les nombres cumulés de cas et de décès
 dus au SARS, et la figure C montre les estimations observées (biaisées)
@@ -1360,7 +1360,7 @@ peut-il influer sur les stratégies de santé publique ?</li>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint3" aria-expanded="false" aria-controls="collapseHint3">
   <h4 class="accordion-header" id="headingHint3"> Donner un indice </h4>
 </button>
-<div id="collapseHint3" class="accordion-collapse collapse" data-bs-parent="#accordionHint3" aria-labelledby="headingHint3">
+<div id="collapseHint3" class="accordion-collapse collapse" aria-labelledby="headingHint3" data-bs-parent="#accordionHint3">
 <div class="accordion-body">
 <p>Nous pouvons soit inspecter visuellement ou analyser les tableaux des
 données de sortie.</p>
@@ -1373,7 +1373,7 @@ données de sortie.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution6" aria-expanded="false" aria-controls="collapseSolution6">
   <h4 class="accordion-header" id="headingSolution6"> Montrer la solution </h4>
 </button>
-<div id="collapseSolution6" class="accordion-collapse collapse" data-bs-parent="#accordionSolution6" aria-labelledby="headingSolution6">
+<div id="collapseSolution6" class="accordion-collapse collapse" aria-labelledby="headingSolution6" data-bs-parent="#accordionSolution6">
 <div class="accordion-body">
 <p>Il y a presque un mois de différence.</p>
 <p>Notez que l’estimation présente une incertitude considérable au début
@@ -1408,7 +1408,7 @@ proportion de décès parmi l’ensemble des personnes infectées.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution7" aria-expanded="false" aria-controls="collapseSolution7">
   <h4 class="accordion-header" id="headingSolution7"> Pourquoi les estimations naïves et ajustées aux délais diffèrent-elles ? </h4>
 </button>
-<div id="collapseSolution7" class="accordion-collapse collapse" data-bs-parent="#accordionSolution7" aria-labelledby="headingSolution7">
+<div id="collapseSolution7" class="accordion-collapse collapse" aria-labelledby="headingSolution7" data-bs-parent="#accordionSolution7">
 <div class="accordion-body">
 <p>La méthode de la librairie <a href="https://github.com/epiverse-trace/cfr" class="external-link">cfr</a> vise à obtenir un
 estimateur non biaisé “bien avant” d’observer toute l’évolution de
@@ -1427,7 +1427,7 @@ et al, 2009</a>.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution8" aria-expanded="false" aria-controls="collapseSolution8">
   <h4 class="accordion-header" id="headingSolution8"> Quel est le processus d’échantillonnage ? </h4>
 </button>
-<div id="collapseSolution8" class="accordion-collapse collapse" data-bs-parent="#accordionSolution8" aria-labelledby="headingSolution8">
+<div id="collapseSolution8" class="accordion-collapse collapse" aria-labelledby="headingSolution8" data-bs-parent="#accordionSolution8">
 <div class="accordion-body">
 <figure><img src="../fig/cfr-pone.0006852.g001.png" alt="La population des cas confirmés et le processus d’échantillonnage pour l’estimation du RL non biaisé au cours d’une épidémie selon Nishiura et al. 2009" class="figure mx-auto d-block"><div class="figcaption">La population des cas confirmés et le processus
 d’échantillonnage pour l’estimation du RL non biaisé au cours d’une
@@ -1468,7 +1468,7 @@ D_{t} \log{\pi} +
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution9" aria-expanded="false" aria-controls="collapseSolution9">
   <h4 class="accordion-header" id="headingSolution9"> Limitations </h4>
 </button>
-<div id="collapseSolution9" class="accordion-collapse collapse" data-bs-parent="#accordionSolution9" aria-labelledby="headingSolution9">
+<div id="collapseSolution9" class="accordion-collapse collapse" aria-labelledby="headingSolution9" data-bs-parent="#accordionSolution9">
 <div class="accordion-body">
 <ul><li>Le RL ajusté aux délais ne prend pas en charge toutes les sources
 d’erreur dans les données, telle que la non-détection de toutes les
@@ -1502,7 +1502,7 @@ pouvons suivre analogie ci-après :</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution10" aria-expanded="false" aria-controls="collapseSolution10">
   <h4 class="accordion-header" id="headingSolution10"> Risque de létalité lié à l’infection et à l’hospitalisation </h4>
 </button>
-<div id="collapseSolution10" class="accordion-collapse collapse" data-bs-parent="#accordionSolution10" aria-labelledby="headingSolution10">
+<div id="collapseSolution10" class="accordion-collapse collapse" aria-labelledby="headingSolution10" data-bs-parent="#accordionSolution10">
 <div class="accordion-body">
 <p>Si pour le risque de décès (RL) d’un <em>cas</em>, nous exigeons
 :</p>
@@ -1530,7 +1530,7 @@ qu’une</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution11" aria-expanded="false" aria-controls="collapseSolution11">
   <h4 class="accordion-header" id="headingSolution11"> Sources de données pour d’autres mesures de la gravité </h4>
 </button>
-<div id="collapseSolution11" class="accordion-collapse collapse" data-bs-parent="#accordionSolution11" aria-labelledby="headingSolution11">
+<div id="collapseSolution11" class="accordion-collapse collapse" aria-labelledby="headingSolution11" data-bs-parent="#accordionSolution11">
 <div class="accordion-body">
 <p><a href="https://www.nature.com/articles/s41467-020-19238-2/figures/1" class="external-link">Yang
 et al, 2020</a> résume les différentes définitions et sources de données
@@ -1613,7 +1613,7 @@ correspondante.</p>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint4" aria-expanded="false" aria-controls="collapseHint4">
   <h4 class="accordion-header" id="headingHint4"> Donner un indice </h4>
 </button>
-<div id="collapseHint4" class="accordion-collapse collapse" data-bs-parent="#accordionHint4" aria-labelledby="headingHint4">
+<div id="collapseHint4" class="accordion-collapse collapse" aria-labelledby="headingHint4" data-bs-parent="#accordionHint4">
 <div class="accordion-body">
 <p><strong>Comment réorganiser les données d’entrée ?</strong></p>
 <p>Le réorganisation des données d’entrée durant le processus d’analyse
@@ -1638,7 +1638,7 @@ manuel de référence</a> sur la façon d’utiliser la fonction
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution12" aria-expanded="false" aria-controls="collapseSolution12">
   <h4 class="accordion-header" id="headingSolution12"> Montrer la solution </h4>
 </button>
-<div id="collapseSolution12" class="accordion-collapse collapse" data-bs-parent="#accordionSolution12" aria-labelledby="headingSolution12">
+<div id="collapseSolution12" class="accordion-collapse collapse" aria-labelledby="headingSolution12" data-bs-parent="#accordionSolution12">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb31">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1810,7 +1810,7 @@ estimer un RL ajusté aux délais, stratifié par pays.</p>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint5" aria-expanded="false" aria-controls="collapseHint5">
   <h4 class="accordion-header" id="headingHint5"> Donner un indice </h4>
 </button>
-<div id="collapseHint5" class="accordion-collapse collapse" data-bs-parent="#accordionHint5" aria-labelledby="headingHint5">
+<div id="collapseHint5" class="accordion-collapse collapse" aria-labelledby="headingHint5" data-bs-parent="#accordionHint5">
 <div class="accordion-body">
 <p>Une façon d’effectuer une <em>analyse stratifiée</em> consiste à
 appliquer un modèle à des données imbriquées. Cette <a href="https://tidyr.tidyverse.org/articles/nest.html#nested-data-and-models" class="external-link">vignette
@@ -1828,7 +1828,7 @@ le modèle.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution13" aria-expanded="false" aria-controls="collapseSolution13">
   <h4 class="accordion-header" id="headingSolution13"> Montrer la solution </h4>
 </button>
-<div id="collapseSolution13" class="accordion-collapse collapse" data-bs-parent="#accordionSolution13" aria-labelledby="headingSolution13">
+<div id="collapseSolution13" class="accordion-collapse collapse" aria-labelledby="headingSolution13" data-bs-parent="#accordionSolution13">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb39">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>

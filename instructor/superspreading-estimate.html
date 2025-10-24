@@ -383,18 +383,46 @@ super propagation” à l’aide de <a href="https://github.com/epiverse-trace/s
 </div>
 </div>
 </div>
-<div id="conditions-préalables" class="callout prereq">
+<div id="prereq1" class="callout prereq">
 <div class="callout-square">
 <i class="callout-icon" data-feather="check"></i>
 </div>
-<div id="conditions-préalables" class="callout-inner">
-<h3 class="callout-title">Conditions préalables</h3>
+<div class="callout-inner">
+<h3 class="callout-title">Pré-requis</h3>
 <div class="callout-content">
 <p>Les apprenants doivent se familiariser avec les concepts suivants
 avant de suivre ce tutoriel :</p>
 <p><strong>Statistiques</strong>: distributions de probabilités
 courantes, en particulier Poisson et binôme négatif.</p>
 <p><strong>Théorie épidémique</strong> Le nombre de reproduction, R.</p>
+<p><strong>R packages installés</strong>: <a href="https://www.repidemicsconsortium.org/epicontacts/" class="external-link">epicontacts</a>,
+<a href="https://lbbe-software.github.io/fitdistrplus/" class="external-link">fitdistrplus</a>, <a href="https://github.com/epiverse-trace/superspreading" class="external-link">superspreading</a>,
+<a href="https://github.com/reconhub/outbreaks" class="external-link">outbreaks</a>, <a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a>.</p>
+</div>
+</div>
+</div>
+<div id="accordionSpoiler1" class="accordion spoiler-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler1" aria-expanded="false" aria-controls="collapseSpoiler1">
+  <h3 class="accordion-header" id="headingSpoiler1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Afficher les détails </h3>
+</button>
+<div id="collapseSpoiler1" class="accordion-collapse collapse" aria-labelledby="headingSpoiler1" data-bs-parent="#accordionSpoiler1">
+<div class="accordion-body">
+<p>Installer les packages si elles ne le sont pas déjà:</p>
+<div class="codewrapper sourceCode" id="cb1">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># si {pak} n'est pas disponible, exécutez : install.packages("pak")</span></span>
+<span><span class="fu">pak</span><span class="fu">::</span><span class="fu">pak</span><span class="op">(</span><span class="st">"epicontacts"</span><span class="op">)</span></span>
+<span><span class="fu">pak</span><span class="fu">::</span><span class="fu">pak</span><span class="op">(</span><span class="st">"fitdistrplus"</span><span class="op">)</span></span>
+<span><span class="fu">pak</span><span class="fu">::</span><span class="fu">pak</span><span class="op">(</span><span class="st">"superspreading"</span><span class="op">)</span></span>
+<span><span class="fu">pak</span><span class="fu">::</span><span class="fu">pak</span><span class="op">(</span><span class="st">"outbreaks"</span><span class="op">)</span></span>
+<span><span class="fu">pak</span><span class="fu">::</span><span class="fu">pak</span><span class="op">(</span><span class="st">"tidyverse"</span><span class="op">)</span></span></code></pre>
+</div>
+<p>Si vous recevez un message d’erreur, rendez-vous sur la <a href="index.html#configuration-des-logiciels">page principale de
+configuration</a>.</p>
+</div>
 </div>
 </div>
 </div>
@@ -459,7 +487,7 @@ la variation de la transmission sur la prise de décision.</p>
 <p>Nous utiliserons le tuyau <code>%&gt;%</code> pour relier certaines
 des fonctions de ces packages, donc appelons aussi le package
 <a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a> .</p>
-<div class="codewrapper sourceCode" id="cb1">
+<div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -506,7 +534,7 @@ données <a href="https://github.com/reconhub/outbreaks" class="external-link">o
 <a href="https://www.repidemicsconsortium.org/epicontacts/" class="external-link">epicontacts</a> pour calculer la distribution des cas
 secondaires lors de l’épidémie de MERS-CoV de 2015 en Corée du Sud (<a href="https://community.appliedepi.org/t/estimating-the-degree-of-super-spreading-from-transmission-chain-data/103/2" class="external-link">Campbell,
 2022</a>) :</p>
-<div class="codewrapper sourceCode" id="cb2">
+<div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -521,19 +549,19 @@ secondaires lors de l’épidémie de MERS-CoV de 2015 en Corée du Sud (<a href
 <p>Avec l’argument <code>directed = TRUE</code> nous configurons un
 graphe orienté. Ces directions intègrent notre hypothèse de la paire
 “<strong>infecteur-infecté</strong>”.</p>
-<div class="codewrapper sourceCode" id="cb3">
+<div class="codewrapper sourceCode" id="cb4">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># visualise contact network</span></span>
 <span><span class="fu">epicontacts</span><span class="fu">::</span><span class="fu">vis_epicontacts</span><span class="op">(</span><span class="va">epi_contacts</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="../fig/superspreading-estimate-rendered-unnamed-chunk-4-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div id="accordionSpoiler1" class="accordion spoiler-accordion accordion-flush">
+<figure><img src="../fig/superspreading-estimate-rendered-unnamed-chunk-5-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div id="accordionSpoiler2" class="accordion spoiler-accordion accordion-flush">
 <div class="accordion-item">
-<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler1" aria-expanded="false" aria-controls="collapseSpoiler1">
-  <h3 class="accordion-header" id="headingSpoiler1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Les données de contact sont-elles bien rangées ? </h3>
+<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler2" aria-expanded="false" aria-controls="collapseSpoiler2">
+  <h3 class="accordion-header" id="headingSpoiler2">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Les données de contact sont-elles bien rangées ? </h3>
 </button>
-<div id="collapseSpoiler1" class="accordion-collapse collapse" aria-labelledby="headingSpoiler1" data-bs-parent="#accordionSpoiler1">
+<div id="collapseSpoiler2" class="accordion-collapse collapse" aria-labelledby="headingSpoiler2" data-bs-parent="#accordionSpoiler2">
 <div class="accordion-body">
 <p>Les données de contact d’une chaîne de transmission peuvent fournir
 des informations sur les personnes infectées qui sont entrées en contact
@@ -552,7 +580,7 @@ a généralement contracté l’infection auprès d’une seule autre
 personne.</p>
 <p>Pour garantir l’unicité de ces paires, nous pouvons vérifier les
 réplicats pour les personnes infectées :</p>
-<div class="codewrapper sourceCode" id="cb4">
+<div class="codewrapper sourceCode" id="cb5">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -584,7 +612,7 @@ les individus infectés observés. Dans la base de données des contacts,
 lorsque chaque paire infecteur-infecté est unique, le nombre de lignes
 par infecteur correspond au nombre de cas secondaires générés par cet
 individu.</p>
-<div class="codewrapper sourceCode" id="cb6">
+<div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -633,7 +661,7 @@ dernier groupe d’individus lorsque nous compterons le nombre de cas
 secondaires causés par tous les individus infectés observés. Ils
 apparaîtront dans les <code>&lt;integer&gt;</code> sous la forme
 <code>0</code> cas secondaires.</p>
-<div class="codewrapper sourceCode" id="cb8">
+<div class="codewrapper sourceCode" id="cb9">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -659,12 +687,12 @@ des listes de diffusion.</p>
 </div>
 </div>
 </div>
-<div id="accordionSpoiler2" class="accordion spoiler-accordion accordion-flush">
+<div id="accordionSpoiler3" class="accordion spoiler-accordion accordion-flush">
 <div class="accordion-item">
-<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler2" aria-expanded="false" aria-controls="collapseSpoiler2">
-  <h3 class="accordion-header" id="headingSpoiler2">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Quand utiliser “only_linelist = FALSE” ? </h3>
+<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler3" aria-expanded="false" aria-controls="collapseSpoiler3">
+  <h3 class="accordion-header" id="headingSpoiler3">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Quand utiliser “only_linelist = FALSE” ? </h3>
 </button>
-<div id="collapseSpoiler2" class="accordion-collapse collapse" aria-labelledby="headingSpoiler2" data-bs-parent="#accordionSpoiler2">
+<div id="collapseSpoiler3" class="accordion-collapse collapse" aria-labelledby="headingSpoiler3" data-bs-parent="#accordionSpoiler3">
 <div class="accordion-body">
 <p>L’hypothèse selon laquelle “la liste de référence inclura toutes les
 personnes figurant dans les contacts et la liste de référence”. peut ne
@@ -677,7 +705,7 @@ vous devez prendre en compte uniquement les personnes figurant dans les
 données de contact, à <code>epicontacts::get_degree()</code> nous
 utilisons l’argument <code>only_linelist = FALSE</code>.</p>
 <p>Vous trouverez ici une version imprimée <a href="https://reprex.tidyverse.org/" class="external-link">exemple reproductible</a>:</p>
-<div class="codewrapper sourceCode" id="cb9">
+<div class="codewrapper sourceCode" id="cb10">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -721,7 +749,7 @@ comptaient moins de cinq ou aucun cas secondaire.</p>
 <p>&lt;La visualisation du nombre de cas secondaires sur un histogramme
 nous aidera à faire le lien avec la distribution statistique à ajuster :
 –&gt;</p>
-<div class="codewrapper sourceCode" id="cb10">
+<div class="codewrapper sourceCode" id="cb11">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -735,7 +763,7 @@ nous aidera à faire le lien avec la distribution statistique à ajuster :
 <span>    y <span class="op">=</span> <span class="st">"Frequency"</span></span>
 <span>  <span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="../fig/superspreading-estimate-rendered-unnamed-chunk-8-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>Le nombre de cas secondaires peut être utilisé pour estimer de
+<figure><img src="../fig/superspreading-estimate-rendered-unnamed-chunk-9-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>Le nombre de cas secondaires peut être utilisé pour estimer de
 manière empirique la <strong>distribution de la descendance</strong> qui
 est le nombre de cas <em>secondaires</em> causées par chaque cas. Une
 distribution statistique candidate utilisée pour modéliser la
@@ -746,7 +774,7 @@ négative</strong> avec deux paramètres :</p>
 entièrement sensible, et</p></li>
 <li><p><strong>Dispersion</strong> exprimée par <span class="math inline">\(k\)</span> qui représente la variation au niveau
 individuel de la transmission par des individus isolés.</p></li>
-</ul><figure><img src="../fig/superspreading-estimate-rendered-unnamed-chunk-9-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>L’histogramme et le diagramme de densité montrent que la distribution
+</ul><figure><img src="../fig/superspreading-estimate-rendered-unnamed-chunk-10-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>L’histogramme et le diagramme de densité montrent que la distribution
 de la descendance est fortement asymétrique, soit
 <strong>surdispersée</strong>. Dans ce cadre, les événements de
 surdispersion (ESS) ne sont pas arbitraires ou exceptionnels, mais
@@ -777,12 +805,12 @@ cas secondaires.</li>
 </ul></div>
 </div>
 </div>
-<div id="accordionSpoiler3" class="accordion spoiler-accordion accordion-flush">
+<div id="accordionSpoiler4" class="accordion spoiler-accordion accordion-flush">
 <div class="accordion-item">
-<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler3" aria-expanded="false" aria-controls="collapseSpoiler3">
-  <h3 class="accordion-header" id="headingSpoiler3">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Poisson, surdispersion et binôme négatif </h3>
+<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler4" aria-expanded="false" aria-controls="collapseSpoiler4">
+  <h3 class="accordion-header" id="headingSpoiler4">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Poisson, surdispersion et binôme négatif </h3>
 </button>
-<div id="collapseSpoiler3" class="accordion-collapse collapse" aria-labelledby="headingSpoiler3" data-bs-parent="#accordionSpoiler3">
+<div id="collapseSpoiler4" class="accordion-collapse collapse" aria-labelledby="headingSpoiler4" data-bs-parent="#accordionSpoiler4">
 <div class="accordion-body">
 <!-- histoires de distribution -->
 <p>Pour les occurrences d’événements discrets associés, nous pouvons
@@ -850,7 +878,7 @@ un ordinateur plus ancien ou plus lent, vous pouvez sauter cette
 </button>
 <div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
-<div class="codewrapper sourceCode" id="cb11">
+<div class="codewrapper sourceCode" id="cb12">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -879,7 +907,7 @@ un ordinateur plus ancien ou plus lent, vous pouvez sauter cette
 <span>    y <span class="op">=</span> <span class="st">"Frequency"</span></span>
 <span>  <span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="../fig/superspreading-estimate-rendered-unnamed-chunk-10-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>D’après une inspection visuelle, la distribution des cas secondaires
+<figure><img src="../fig/superspreading-estimate-rendered-unnamed-chunk-11-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>D’après une inspection visuelle, la distribution des cas secondaires
 pour l’ensemble des données relatives à Ebola en
 <code>ebola_sim_clean</code> montre une distribution asymétrique avec
 des cas secondaires inférieurs ou égaux à 6. Nous devons compléter cette
@@ -895,13 +923,13 @@ binomiale négative au nombre de cas secondaires.</p>
 <p>Nous pouvons ajuster des distributions aux données à l’aide de la
 fonction <a href="https://lbbe-software.github.io/fitdistrplus/" class="external-link">fitdistrplus</a> qui fournit des estimations du
 maximum de vraisemblance.</p>
-<div class="codewrapper sourceCode" id="cb12">
+<div class="codewrapper sourceCode" id="cb13">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">library</span><span class="op">(</span><span class="va">fitdistrplus</span><span class="op">)</span></span></code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb13">
+<div class="codewrapper sourceCode" id="cb14">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -944,7 +972,7 @@ considérable pour les événements de superposition.</p>
 <p>Nous pouvons superposer les valeurs de densité estimées de la
 distribution binomiale négative ajustée et l’histogramme du nombre de
 cas secondaires :</p>
-<figure><img src="../fig/superspreading-estimate-rendered-unnamed-chunk-13-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div id="variation-de-la-transmission-au-niveau-individuel" class="callout">
+<figure><img src="../fig/superspreading-estimate-rendered-unnamed-chunk-14-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div id="variation-de-la-transmission-au-niveau-individuel" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
@@ -1009,7 +1037,7 @@ fonction.</p>
 </button>
 <div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
-<div class="codewrapper sourceCode" id="cb15">
+<div class="codewrapper sourceCode" id="cb16">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1027,7 +1055,7 @@ Parameters:
 size 0.8539443 0.072505326
 mu   0.3675993 0.009497097</code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb17">
+<div class="codewrapper sourceCode" id="cb18">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1172,7 +1200,7 @@ al, 2022</a>)</p>
 probabilité d’avoir une grappe d’infections secondaires causées par un
 cas primaire identifié par traçage rétrospectif de taille <span class="math inline">\(X\)</span> ou plus (<a href="https://wellcomeopenresearch.org/articles/5-239/v3" class="external-link">Endo et al.,
 2020</a>).</p>
-<div class="codewrapper sourceCode" id="cb18">
+<div class="codewrapper sourceCode" id="cb19">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1253,7 +1281,7 @@ descendance et des paramètres de dispersion, à l’aide de la méthode des
 </button>
 <div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
 <div class="accordion-body">
-<div class="codewrapper sourceCode" id="cb20">
+<div class="codewrapper sourceCode" id="cb21">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1338,7 +1366,7 @@ distribution</a> une application brillante.</p>
 <p>Pour obtenir la valeur du quantile pour le 99ème centile, nous devons
 utiliser la fonction <a href="https://sakai.unc.edu/access/content/group/3d1eb92e-7848-4f55-90c3-7c72a54e7e43/public/docs/lectures/lecture13.htm#probfunc" class="external-link">fonction
 de densité</a> de la distribution de Poisson <code>dpois()</code>.</p>
-<div class="codewrapper sourceCode" id="cb22">
+<div class="codewrapper sourceCode" id="cb23">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1408,7 +1436,7 @@ descendants pour SARS, Smallpox, Mpox, Pneumonic Plague, Hantavirus
 Pulmonary Syndrome, Ebola Virus Disease. Accédons à la distribution des
 descendants <code>mean</code> et <code>dispersion</code> pour SARS-1
 :</p>
-<div class="codewrapper sourceCode" id="cb24">
+<div class="codewrapper sourceCode" id="cb25">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1438,7 +1466,7 @@ descendants <code>mean</code> et <code>dispersion</code> pour SARS-1
 </button>
 <div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
 <div class="accordion-body">
-<div class="codewrapper sourceCode" id="cb26">
+<div class="codewrapper sourceCode" id="cb27">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1458,7 +1486,7 @@ descendants <code>mean</code> et <code>dispersion</code> pour SARS-1
 <pre class="output" tabindex="0"><code>      mean dispersion
        1.5        5.1 </code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb28">
+<div class="codewrapper sourceCode" id="cb29">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1477,7 +1505,7 @@ descendants <code>mean</code> et <code>dispersion</code> pour SARS-1
 <pre class="output" tabindex="0"><code>    R   k prop_80
 1 1.5 5.1   43.2%</code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb30">
+<div class="codewrapper sourceCode" id="cb31">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1498,7 +1526,7 @@ descendants <code>mean</code> et <code>dispersion</code> pour SARS-1
 <pre class="output" tabindex="0"><code>     R    k prop_80
 1 1.63 0.16     13%</code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb32">
+<div class="codewrapper sourceCode" id="cb33">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
