@@ -554,7 +554,7 @@ graphe orienté. Ces directions intègrent notre hypothèse de la paire
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># visualise contact network</span></span>
-<span><span class="fu">epicontacts</span><span class="fu">::</span><span class="fu">vis_epicontacts</span><span class="op">(</span><span class="va">epi_contacts</span><span class="op">)</span></span></code></pre>
+<span><span class="fu">plot</span><span class="op">(</span><span class="va">epi_contacts</span><span class="op">)</span></span></code></pre>
 </div>
 <figure><img src="../fig/superspreading-estimate-rendered-unnamed-chunk-5-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div id="accordionSpoiler2" class="accordion spoiler-accordion accordion-flush">
 <div class="accordion-item">
@@ -862,11 +862,10 @@ surdispersée ?</li>
 <div id="collapseHint1" class="accordion-collapse collapse" aria-labelledby="headingHint1" data-bs-parent="#accordionHint1">
 <div class="accordion-body">
 <p>⚠️ <strong>Étape facultative :</strong> Cet ensemble de données a
-5829 cas. Exécution <code>epicontacts::vis_epicontacts()</code> peut
-prendre plusieurs minutes et utiliser beaucoup de mémoire pour les
-grandes épidémies telles que la liste des cas d’Ebola. Si vous utilisez
-un ordinateur plus ancien ou plus lent, vous pouvez sauter cette
-étape.</p>
+5829 cas. Exécution <code>plot(&lt;epicontacts&gt;)</code> peut prendre
+plusieurs minutes et utiliser beaucoup de mémoire pour les grandes
+épidémies telles que la liste des cas d’Ebola. Si vous utilisez un
+ordinateur plus ancien ou plus lent, vous pouvez sauter cette étape.</p>
 </div>
 </div>
 </div>
