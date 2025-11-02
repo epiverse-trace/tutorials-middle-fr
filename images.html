@@ -318,6 +318,18 @@
 </div>
 <!--/div.accordion-flush-->
 
+<div class="accordion accordion-flush" id="accordionFlush8">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading8">
+        <a href="superspreading-simulate.html">7. Simuler des chaînes de transmission</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
                 </div>
               </div>
             </div>
@@ -650,7 +662,63 @@ suivantes 1, streptocoque du groupe A ; 2, fièvre de Lassa ; 3,
 pneumonie à mycoplasme ; 4, peste pulmonaire ; 5, tuberculose. R n’est
 pas indiqué pour les “autres” maladies et est hors échelle pour la
 variole.</div>
-</figure><hr></section>
+</figure><hr></section><section id="superspreading-simulate"><h2 class="section-heading"><a href="superspreading-simulate.html">Simuler des chaînes de transmission</a></h2>
+<hr class="half-width">
+<h3 id="superspreading-simulate-figure-1">Figure 1</h3>
+<p aria-hidden="true">Image 1 sur 1 : ‘Nombre observé de cas cumulés liés à l épidémie du syndrome respiratoire du Moyen-Orient (MERS) en Corée du Sud, en 2015, ainsi que les chaînes de transmission simulées en supposant une distribution des descendants avec $R=0.6$ et $k=0.02$.’</p>
+<figure style="text-align: center"><img src="fig/superspreading-simulate-rendered-unnamed-chunk-1-1.png" alt="Nombre observé de cas cumulés liés à l épidémie du syndrome respiratoire du Moyen-Orient (MERS) en Corée du Sud, en 2015, ainsi que les chaînes de transmission simulées en supposant une distribution des descendants avec $R=0.6$ et $k=0.02$." class="figure mx-auto d-block"><figcaption>
+Nombre observé de cas cumulés liés à l épidémie du syndrome respiratoire
+du Moyen-Orient (MERS) en Corée du Sud, en 2015, ainsi que les chaînes
+de transmission simulées en supposant une distribution des descendants
+avec <span class="math inline">\(R=0.6\)</span> et <span class="math inline">\(k=0.02\)</span>.
+</figcaption></figure><hr>
+<h3 id="superspreading-simulate-figure-2">Figure 2</h3>
+<p aria-hidden="true">Image 1 sur 1 : ‘Exemple d’une chaîne de transmission commençant par un seul cas C1. Les cas sont représentés par des cercles bleus et des flèches indiquant qui a infecté qui. La chaîne se développe à travers les générations Gen 1, Gen 2 et Gen 3, produisant les cas C2, C3, C4, C5 et C6. La chaîne se termine à la génération Gen 3 avec les cas C4, C5 et C6. La taille de la chaîne de C1 est de 6, y compris C1 (c’est-à-dire la somme de tous les cercles bleus), et sa longueur est de 3, ce qui inclut la génération 1 (nombre maximal de générations atteint par la chaîne de C1) (Azam &amp; Funk, 2024).’</p>
+<figure><img src="https://raw.githubusercontent.com/epiverse-trace/epichains/main/vignettes/img/transmission_chain_example.png" alt="Exemple d’une chaîne de transmission commençant par un seul cas C1. Les cas sont représentés par des cercles bleus et des flèches indiquant qui a infecté qui. La chaîne se développe à travers les générations Gen 1, Gen 2 et Gen 3, produisant les cas C2, C3, C4, C5 et C6. La chaîne se termine à la génération Gen 3 avec les cas C4, C5 et C6. La taille de la chaîne de C1 est de 6, y compris C1 (c’est-à-dire la somme de tous les cercles bleus), et sa longueur est de 3, ce qui inclut la génération 1 (nombre maximal de générations atteint par la chaîne de C1) (Azam &amp; Funk, 2024)." class="figure mx-auto d-block"><div class="figcaption">
+<strong>Exemple d’une chaîne de transmission
+commençant par un seul cas C1.</strong> Les cas sont représentés par des
+cercles bleus et des flèches indiquant qui a infecté qui. La chaîne se
+développe à travers les générations Gen 1, Gen 2 et Gen 3, produisant
+les cas C2, C3, C4, C5 et C6. La chaîne se termine à la génération Gen 3
+avec les cas C4, C5 et C6. La taille de la chaîne de C1 est de 6, y
+compris C1 (c’est-à-dire la somme de tous les cercles bleus), et sa
+longueur est de 3, ce qui inclut la génération 1 (nombre maximal de
+générations atteint par la chaîne de C1) (<a href="https://epiverse-trace.github.io/epichains/articles/epichains.html" class="external-link">Azam
+&amp; Funk, 2024</a>).</div>
+</figure><hr>
+<h3 id="superspreading-simulate-figure-3">Figure 3</h3>
+<p aria-hidden="true">Image 1 sur 1 : ‘Schéma de la relation entre les différentes périodes de transmission entre un infecteur et un infecté dans une paire de transmission. La fenêtre d’exposition est définie comme l’intervalle de temps au cours duquel se produit l’exposition virale, et la fenêtre de transmission est définie comme l’intervalle de temps pour la transmission ultérieure par rapport à la durée de l’infection (Chung Lau et al., 2021).’</p>
+<figure><img src="fig/serial-interval-observed.jpeg" alt="Schéma de la relation entre les différentes périodes de transmission entre un infecteur et un infecté dans une paire de transmission. La fenêtre d’exposition est définie comme l’intervalle de temps au cours duquel se produit l’exposition virale, et la fenêtre de transmission est définie comme l’intervalle de temps pour la transmission ultérieure par rapport à la durée de l’infection (Chung Lau et al., 2021)." class="figure mx-auto d-block"><div class="figcaption">Schéma de la relation entre les différentes
+périodes de transmission entre un infecteur et un infecté dans une paire
+de transmission. La fenêtre d’exposition est définie comme l’intervalle
+de temps au cours duquel se produit l’exposition virale, et la fenêtre
+de transmission est définie comme l’intervalle de temps pour la
+transmission ultérieure par rapport à la durée de l’infection (<a href="https://academic.oup.com/jid/article/224/10/1664/6356465" class="external-link">Chung
+Lau et al., 2021</a>).</div>
+</figure><hr>
+<h3 id="superspreading-simulate-figure-4">Figure 4</h3>
+<figure><img src="fig/superspreading-simulate-rendered-unnamed-chunk-4-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><hr>
+<h3 id="superspreading-simulate-figure-5">Figure 5</h3>
+<figure><img src="fig/superspreading-simulate-rendered-unnamed-chunk-21-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><hr>
+<h3 id="superspreading-simulate-figure-6">Figure 6</h3>
+<figure><img src="fig/superspreading-simulate-rendered-unnamed-chunk-25-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><hr>
+<h3 id="superspreading-simulate-figure-7">Figure 7</h3>
+<figure><img src="fig/superspreading-simulate-rendered-unnamed-chunk-26-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><hr>
+<h3 id="superspreading-simulate-figure-8">Figure 8</h3>
+<p aria-hidden="true">Image 1 sur 1 : ‘Croissance des épidémies avec R = 1,5 et un cas initial, conditionné à la non-extinction. Les cadres indiquent la médiane et l’écart interquartile (EQI) de la première génération de maladie avec 100 cas ; les moustaches indiquent les valeurs les plus extrêmes dans un rayon de 1,5 × EQI des cadres, et les croix indiquent les valeurs aberrantes. Les pourcentages indiquent la proportion de 10 000 foyers simulés qui ont atteint le seuil de 100 cas (Lloyd-Smith et al., 2005).’</p>
+<figure><img src="fig/see-nature04153_Fig2-c.jpg" alt="Croissance des épidémies avec R = 1,5 et un cas initial, conditionné à la non-extinction. Les cadres indiquent la médiane et l’écart interquartile (EQI) de la première génération de maladie avec 100 cas ; les moustaches indiquent les valeurs les plus extrêmes dans un rayon de 1,5 × EQI des cadres, et les croix indiquent les valeurs aberrantes. Les pourcentages indiquent la proportion de 10 000 foyers simulés qui ont atteint le seuil de 100 cas (Lloyd-Smith et al., 2005)." class="figure mx-auto d-block"><div class="figcaption">
+<strong>Croissance des épidémies avec R = 1,5 et
+un cas initial, conditionné à la non-extinction.</strong> Les cadres
+indiquent la médiane et l’écart interquartile (EQI) de la première
+génération de maladie avec 100 cas ; les moustaches indiquent les
+valeurs les plus extrêmes dans un rayon de 1,5 × EQI des cadres, et les
+croix indiquent les valeurs aberrantes. Les pourcentages indiquent la
+proportion de 10 000 foyers simulés qui ont atteint le seuil de 100 cas
+(<a href="https://www.nature.com/articles/nature04153" class="external-link">Lloyd-Smith et
+al., 2005</a>).</div>
+</figure><hr>
+<h3 id="superspreading-simulate-figure-9">Figure 9</h3>
+<figure><img src="fig/superspreading-simulate-rendered-unnamed-chunk-31-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><hr></section>
 </div>
     </main>
 </div>
