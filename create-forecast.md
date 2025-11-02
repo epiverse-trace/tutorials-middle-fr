@@ -136,6 +136,22 @@ estimates <- EpiNow2::epinow(
 )
 ```
 
+``` output
+WARN [2025-11-02 11:12:41] epinow: There were 500 transitions after warmup that exceeded the maximum treedepth. Increase max_treedepth above 12. See
+https://mc-stan.org/misc/warnings.html#maximum-treedepth-exceeded - 
+WARN [2025-11-02 11:12:41] epinow: Examine the pairs() plot to diagnose sampling problems
+ - 
+WARN [2025-11-02 11:12:42] epinow: The largest R-hat is NA, indicating chains have not mixed.
+Running the chains for more iterations may help. See
+https://mc-stan.org/misc/warnings.html#r-hat - 
+WARN [2025-11-02 11:12:43] epinow: Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.
+Running the chains for more iterations may help. See
+https://mc-stan.org/misc/warnings.html#bulk-ess - 
+WARN [2025-11-02 11:12:44] epinow: Tail Effective Samples Size (ESS) is too low, indicating posterior variances and tail quantiles may be unreliable.
+Running the chains for more iterations may help. See
+https://mc-stan.org/misc/warnings.html#tail-ess - 
+```
+
 ::::::::::::::::::::::::::::::::: callout
 
 ### N'attendez pas que cela se termine !
@@ -191,28 +207,18 @@ estimates <- EpiNow2::epinow(
   # Add observation model
   obs = EpiNow2::obs_opts(scale = obs_scale)
 )
-```
 
-``` output
-WARN [2025-10-20 14:21:43] epinow: There were 6 divergent transitions after warmup. See
-https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
-to find out why this is a problem and how to eliminate them. - 
-WARN [2025-10-20 14:21:43] epinow: Examine the pairs() plot to diagnose sampling problems
- - 
-```
-
-``` r
 base::summary(estimates)
 ```
 
 ``` output
-                        measure                 estimate
-                         <char>                   <char>
-1:       New infections per day   20281 (13237 -- 29973)
-2:   Expected change in reports                   Stable
-3:   Effective reproduction no.       0.97 (0.76 -- 1.2)
-4:               Rate of growth -0.012 (-0.093 -- 0.068)
-5: Doubling/halving time (days)         -58 (10 -- -7.4)
+                        measure                estimate
+                         <char>                  <char>
+1:       New infections per day  20403 (13265 -- 31056)
+2:   Expected change in reports                  Stable
+3:   Effective reproduction no.      0.97 (0.77 -- 1.2)
+4:               Rate of growth -0.01 (-0.091 -- 0.072)
+5: Doubling/halving time (days)       -67 (9.7 -- -7.6)
 ```
 
 Les estimations des mesures de transmission telles que le nombre de reproduction efficace et le taux de croissance sont similaires (ou de même valeur) par rapport à la situation où nous n'avons pas tenu compte des observations incomplètes (voir [l'épisode de quantification de la  transmission](../episodes/quantify-transmissibility.md) dans la section "Recherche d'estimations"). Cependant, le nombre de nouveaux cas confirmés par date d'infection a considérablement changé d'ampleur pour refléter l'hypothèse selon laquelle seuls 40 % des cas sont déclarés.
@@ -294,12 +300,6 @@ estimate_cases_to_deaths <- EpiNow2::estimate_secondary(
   secondary = EpiNow2::secondary_opts(type = "incidence"),
   delays = EpiNow2::delay_opts(delay_report_to_death)
 )
-```
-
-``` output
-WARN [2025-10-20 14:21:50] estimate_secondary (chain: 1): Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.
-Running the chains for more iterations may help. See
-https://mc-stan.org/misc/warnings.html#bulk-ess - 
 ```
 
 ::::::::::::::::::::::::::::::::::::: callout
@@ -520,21 +520,29 @@ ebola_estimates <- EpiNow2::epinow(
   # horizon needs to be 14 days to create two week forecast (default is 7 days)
   forecast = EpiNow2::forecast_opts(horizon = 14)
 )
+```
 
+``` output
+WARN [2025-11-02 11:18:12] epinow: Tail Effective Samples Size (ESS) is too low, indicating posterior variances and tail quantiles may be unreliable.
+Running the chains for more iterations may help. See
+https://mc-stan.org/misc/warnings.html#tail-ess - 
+```
+
+``` r
 summary(ebola_estimates)
 ```
 
 ``` output
-                        measure               estimate
-                         <char>                 <char>
-1:       New infections per day         94 (50 -- 188)
-2:   Expected change in reports             Increasing
-3:   Effective reproduction no.       1.7 (1.2 -- 2.4)
-4:               Rate of growth 0.042 (0.003 -- 0.088)
-5: Doubling/halving time (days)        17 (7.9 -- 230)
+                        measure                estimate
+                         <char>                  <char>
+1:       New infections per day          92 (49 -- 198)
+2:   Expected change in reports              Increasing
+3:   Effective reproduction no.        1.6 (1.2 -- 2.4)
+4:               Rate of growth 0.041 (0.0042 -- 0.088)
+5: Doubling/halving time (days)         17 (7.9 -- 170)
 ```
 
-Le numéro de reproduction effectif $R_t$ (à la dernière date des données) est de 1.7 (1.2 -- 2.4). Le taux de croissance exponentiel du nombre de cas est de 0.042 (0.003 -- 0.088).
+Le numéro de reproduction effectif $R_t$ (à la dernière date des données) est de 1.6 (1.2 -- 2.4). Le taux de croissance exponentiel du nombre de cas est de 0.041 (0.0042 -- 0.088).
 
 Visualisez les estimations :
 
