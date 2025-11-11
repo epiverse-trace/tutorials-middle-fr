@@ -345,7 +345,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Établir des prévisions à court terme</h1>
-        <p>Dernière mise à jour le 2025-11-02 |
+        <p>Dernière mise à jour le 2025-11-11 |
 
         <a href="https://github.com/epiverse-trace/tutorials-middle-fr/edit/main/episodes/create-forecast.Rmd" class="external-link">Modifier cette page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -534,19 +534,10 @@ l’aide de :</p>
 <div class="codewrapper">
 <h3 class="code-label">SORTIE<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>WARN [2025-11-02 11:12:41] epinow: There were 500 transitions after warmup that exceeded the maximum treedepth. Increase max_treedepth above 12. See
+<pre class="output" tabindex="0"><code>WARN [2025-11-11 01:44:47] epinow: There were 47 transitions after warmup that exceeded the maximum treedepth. Increase max_treedepth above 12. See
 https://mc-stan.org/misc/warnings.html#maximum-treedepth-exceeded -
-WARN [2025-11-02 11:12:41] epinow: Examine the pairs() plot to diagnose sampling problems
- -
-WARN [2025-11-02 11:12:42] epinow: The largest R-hat is NA, indicating chains have not mixed.
-Running the chains for more iterations may help. See
-https://mc-stan.org/misc/warnings.html#r-hat -
-WARN [2025-11-02 11:12:43] epinow: Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.
-Running the chains for more iterations may help. See
-https://mc-stan.org/misc/warnings.html#bulk-ess -
-WARN [2025-11-02 11:12:44] epinow: Tail Effective Samples Size (ESS) is too low, indicating posterior variances and tail quantiles may be unreliable.
-Running the chains for more iterations may help. See
-https://mc-stan.org/misc/warnings.html#tail-ess - </code></pre>
+WARN [2025-11-11 01:44:47] epinow: Examine the pairs() plot to diagnose sampling problems
+ - </code></pre>
 </div>
 <div id="nattendez-pas-que-cela-se-termine" class="callout">
 <div class="callout-square">
@@ -633,13 +624,13 @@ arguments d’entrée de <code>epinow()</code>:</p>
 <div class="codewrapper">
 <h3 class="code-label">SORTIE<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>                        measure                estimate
-                         &lt;char&gt;                  &lt;char&gt;
-1:       New infections per day  20403 (13265 -- 31056)
-2:   Expected change in reports                  Stable
-3:   Effective reproduction no.      0.97 (0.77 -- 1.2)
-4:               Rate of growth -0.01 (-0.091 -- 0.072)
-5: Doubling/halving time (days)       -67 (9.7 -- -7.6)</code></pre>
+<pre class="output" tabindex="0"><code>                        measure                 estimate
+                         &lt;char&gt;                   &lt;char&gt;
+1:       New infections per day   19968 (13162 -- 29794)
+2:   Expected change in reports        Likely decreasing
+3:   Effective reproduction no.       0.97 (0.77 -- 1.2)
+4:               Rate of growth -0.012 (-0.091 -- 0.064)
+5: Doubling/halving time (days)         -56 (11 -- -7.6)</code></pre>
 </div>
 <p>Les estimations des mesures de transmission telles que le nombre de
 reproduction efficace et le taux de croissance sont similaires (ou de
@@ -767,6 +758,13 @@ options.</p>
 <span>  delays <span class="op">=</span> <span class="fu">EpiNow2</span><span class="fu">::</span><span class="fu">delay_opts</span><span class="op">(</span><span class="va">delay_report_to_death</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre>
 </div>
+<div class="codewrapper">
+<h3 class="code-label">SORTIE<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>WARN [2025-11-11 01:49:02] estimate_secondary (chain: 1): Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.
+Running the chains for more iterations may help. See
+https://mc-stan.org/misc/warnings.html#bulk-ess - </code></pre>
+</div>
 <div id="soyez-prudent-avec-léchelle-de-temps" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
@@ -785,7 +783,7 @@ l’ajustement du modèle et les prévisions.</p>
 <p>Nous représentons l’ajustement du modèle (rubans ombrés) avec les
 observations secondaires (diagramme à barres) et les observations
 primaires (ligne pointillée) comme suit :</p>
-<div class="codewrapper sourceCode" id="cb11">
+<div class="codewrapper sourceCode" id="cb12">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -798,7 +796,7 @@ pour les dates non utilisées dans l’ajustement de modèle.</p>
 connaissons les décès et les cas, nous créons donc une base de données
 en extrayant les cas. Mais dans la pratique, il s’agirait d’un ensemble
 de données différent composé uniquement de cas.</em></p>
-<div class="codewrapper sourceCode" id="cb12">
+<div class="codewrapper sourceCode" id="cb13">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -809,7 +807,7 @@ de données différent composé uniquement de cas.</em></p>
 </div>
 <p>Pour faire des prévisions, nous utilisons l’ajustement du modèle
 <code>estimate_cases_to_deaths</code>:</p>
-<div class="codewrapper sourceCode" id="cb13">
+<div class="codewrapper sourceCode" id="cb14">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -908,7 +906,7 @@ d’incubation et le temps de génération.</p>
 autour de la moyenne et de l’écart-type de la distribution log-normale
 pour la période d’incubation et de la distribution Gamma pour le temps
 de génération.</p>
-<div class="codewrapper sourceCode" id="cb14">
+<div class="codewrapper sourceCode" id="cb15">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -931,7 +929,7 @@ de génération.</p>
 4 Ebola Virus Dise… Ebola V… incubat… gamma             WHO E…  2015         957
 5 Ebola Virus Dise… Ebola V… incubat… gamma             WHO E…  2015         792</code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb16">
+<div class="codewrapper sourceCode" id="cb17">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -964,7 +962,7 @@ de génération.</p>
 <p>Nous lisons les données en utilisant <code>readr::read_csv()</code>.
 Cette fonction reconnaît que la colonne <code>date</code> est une
 <code>&lt;date&gt;</code> vecteur de classe.</p>
-<div class="codewrapper sourceCode" id="cb17">
+<div class="codewrapper sourceCode" id="cb18">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -976,7 +974,7 @@ Cette fonction reconnaît que la colonne <code>date</code> est une
 </div>
 <p>Prétraiter et adapter les données brutes pour
 <a href="https://epiforecasts.io/EpiNow2/" class="external-link">EpiNow2</a>:</p>
-<div class="codewrapper sourceCode" id="cb18">
+<div class="codewrapper sourceCode" id="cb19">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1015,7 +1013,7 @@ Cette fonction reconnaît que la colonne <code>date</code> est une
 </div>
 <p>Nous définissons un modèle d’observation pour mettre à l’échelle le
 nombre estimé et prévu de nouvelles infections :</p>
-<div class="codewrapper sourceCode" id="cb20">
+<div class="codewrapper sourceCode" id="cb21">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1026,7 +1024,7 @@ nombre estimé et prévu de nouvelles infections :</p>
 <p>Comme nous voulons également créer une prévision sur deux semaines,
 nous spécifions <code>horizon = 14</code> pour prévoir 14 jours au lieu
 des 7 jours par défaut.</p>
-<div class="codewrapper sourceCode" id="cb21">
+<div class="codewrapper sourceCode" id="cb22">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1043,11 +1041,11 @@ des 7 jours par défaut.</p>
 <div class="codewrapper">
 <h3 class="code-label">SORTIE<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>WARN [2025-11-02 11:18:12] epinow: Tail Effective Samples Size (ESS) is too low, indicating posterior variances and tail quantiles may be unreliable.
+<pre class="output" tabindex="0"><code>WARN [2025-11-11 01:50:04] epinow: Tail Effective Samples Size (ESS) is too low, indicating posterior variances and tail quantiles may be unreliable.
 Running the chains for more iterations may help. See
 https://mc-stan.org/misc/warnings.html#tail-ess - </code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb23">
+<div class="codewrapper sourceCode" id="cb24">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1058,17 +1056,17 @@ https://mc-stan.org/misc/warnings.html#tail-ess - </code></pre>
 </h3>
 <pre class="output" tabindex="0"><code>                        measure                estimate
                          &lt;char&gt;                  &lt;char&gt;
-1:       New infections per day          92 (49 -- 198)
+1:       New infections per day          94 (49 -- 190)
 2:   Expected change in reports              Increasing
-3:   Effective reproduction no.        1.6 (1.2 -- 2.4)
-4:               Rate of growth 0.041 (0.0042 -- 0.088)
-5: Doubling/halving time (days)         17 (7.9 -- 170)</code></pre>
+3:   Effective reproduction no.        1.7 (1.2 -- 2.4)
+4:               Rate of growth 0.042 (0.0034 -- 0.087)
+5: Doubling/halving time (days)           17 (8 -- 210)</code></pre>
 </div>
 <p>Le numéro de reproduction effectif <span class="math inline">\(R_t\)</span> (à la dernière date des données) est
-de 1.6 (1.2 – 2.4). Le taux de croissance exponentiel du nombre de cas
-est de 0.041 (0.0042 – 0.088).</p>
+de 1.7 (1.2 – 2.4). Le taux de croissance exponentiel du nombre de cas
+est de 0.042 (0.0034 – 0.087).</p>
 <p>Visualisez les estimations :</p>
-<div class="codewrapper sourceCode" id="cb25">
+<div class="codewrapper sourceCode" id="cb26">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1092,7 +1090,7 @@ données partielles, elle présente une grande incertitude.</p>
 <p>Le nombre de reproductions projeté dans le futur peut être remplacé
 par une estimation moins récente, basée sur des données plus nombreuses,
 à l’aide de <code>rt_opts()</code>:</p>
-<div class="codewrapper sourceCode" id="cb26">
+<div class="codewrapper sourceCode" id="cb27">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1197,8 +1195,8 @@ any links that you are not going to use.
   "url": "https://epiverse-trace.github.io/tutorials-middle-fr/instructor/create-forecast.html",
   "identifier": "https://epiverse-trace.github.io/tutorials-middle-fr/instructor/create-forecast.html",
   "dateCreated": "2025-11-02",
-  "dateModified": "2025-11-02",
-  "datePublished": "2025-11-04"
+  "dateModified": "2025-11-11",
+  "datePublished": "2025-11-11"
 }
 
   </script><script>
