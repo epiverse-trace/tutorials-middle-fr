@@ -40,13 +40,9 @@ Les apprenants doivent se familiariser avec les concepts suivants avant de suivr
 
 Installer les packages si elles ne le sont pas déjà:
 
-```{r, eval = FALSE}
-# si {pak} n'est pas disponible, exécutez : install.packages("pak")
-pak::pak("epicontacts")
-pak::pak("fitdistrplus")
-pak::pak("superspreading")
-pak::pak("outbreaks")
-pak::pak("tidyverse")
+```r
+if (!base::require("pak")) install.packages("pak")
+pak::pak(c("epicontacts", "fitdistrplus", "superspreading", "outbreaks", "tidyverse"))
 ```
 
 Si vous recevez un message d'erreur, rendez-vous sur la [page principale de configuration](../learners/setup.md#configuration-des-logiciels).
