@@ -413,82 +413,82 @@ outbreaks::ebola_sim_clean$linelist %>%
 ```
 
 ``` output
-WARN [2025-11-11 01:32:57] dist_fit (chain: 1): The largest R-hat is 1.11, indicating chains have not mixed.
+WARN [2025-11-14 15:43:16] dist_fit (chain: 1): The largest R-hat is 1.06, indicating chains have not mixed.
 Running the chains for more iterations may help. See
 https://mc-stan.org/misc/warnings.html#r-hat - 
-WARN [2025-11-11 01:32:57] dist_fit (chain: 1): Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.
+WARN [2025-11-14 15:43:16] dist_fit (chain: 1): Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.
 Running the chains for more iterations may help. See
 https://mc-stan.org/misc/warnings.html#bulk-ess - 
-WARN [2025-11-11 01:32:57] dist_fit (chain: 1): Tail Effective Samples Size (ESS) is too low, indicating posterior variances and tail quantiles may be unreliable.
+WARN [2025-11-14 15:43:16] dist_fit (chain: 1): Tail Effective Samples Size (ESS) is too low, indicating posterior variances and tail quantiles may be unreliable.
 Running the chains for more iterations may help. See
 https://mc-stan.org/misc/warnings.html#tail-ess - 
-WARN [2025-11-11 01:33:00] dist_fit (chain: 1): The largest R-hat is 1.06, indicating chains have not mixed.
+WARN [2025-11-14 15:43:18] dist_fit (chain: 1): The largest R-hat is 1.07, indicating chains have not mixed.
 Running the chains for more iterations may help. See
 https://mc-stan.org/misc/warnings.html#r-hat - 
-WARN [2025-11-11 01:33:00] dist_fit (chain: 1): Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.
+WARN [2025-11-14 15:43:18] dist_fit (chain: 1): Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.
 Running the chains for more iterations may help. See
 https://mc-stan.org/misc/warnings.html#bulk-ess - 
-WARN [2025-11-11 01:33:00] dist_fit (chain: 1): Tail Effective Samples Size (ESS) is too low, indicating posterior variances and tail quantiles may be unreliable.
+WARN [2025-11-14 15:43:18] dist_fit (chain: 1): Tail Effective Samples Size (ESS) is too low, indicating posterior variances and tail quantiles may be unreliable.
 Running the chains for more iterations may help. See
 https://mc-stan.org/misc/warnings.html#tail-ess - 
-WARN [2025-11-11 01:33:02] dist_fit (chain: 1): Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.
-Running the chains for more iterations may help. See
-https://mc-stan.org/misc/warnings.html#bulk-ess - 
-WARN [2025-11-11 01:33:02] dist_fit (chain: 1): Tail Effective Samples Size (ESS) is too low, indicating posterior variances and tail quantiles may be unreliable.
-Running the chains for more iterations may help. See
-https://mc-stan.org/misc/warnings.html#tail-ess - 
-WARN [2025-11-11 01:33:04] dist_fit (chain: 1): Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.
-Running the chains for more iterations may help. See
-https://mc-stan.org/misc/warnings.html#bulk-ess - 
-WARN [2025-11-11 01:33:04] dist_fit (chain: 1): Tail Effective Samples Size (ESS) is too low, indicating posterior variances and tail quantiles may be unreliable.
-Running the chains for more iterations may help. See
-https://mc-stan.org/misc/warnings.html#tail-ess - 
-WARN [2025-11-11 01:33:06] dist_fit (chain: 1): The largest R-hat is 1.12, indicating chains have not mixed.
+WARN [2025-11-14 15:43:20] dist_fit (chain: 1): The largest R-hat is 1.07, indicating chains have not mixed.
 Running the chains for more iterations may help. See
 https://mc-stan.org/misc/warnings.html#r-hat - 
-WARN [2025-11-11 01:33:06] dist_fit (chain: 1): Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.
+WARN [2025-11-14 15:43:20] dist_fit (chain: 1): Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.
 Running the chains for more iterations may help. See
 https://mc-stan.org/misc/warnings.html#bulk-ess - 
-WARN [2025-11-11 01:33:06] dist_fit (chain: 1): Tail Effective Samples Size (ESS) is too low, indicating posterior variances and tail quantiles may be unreliable.
+WARN [2025-11-14 15:43:20] dist_fit (chain: 1): Tail Effective Samples Size (ESS) is too low, indicating posterior variances and tail quantiles may be unreliable.
 Running the chains for more iterations may help. See
 https://mc-stan.org/misc/warnings.html#tail-ess - 
-WARN [2025-11-11 01:33:08] dist_fit (chain: 1): The largest R-hat is 1.15, indicating chains have not mixed.
+WARN [2025-11-14 15:43:22] dist_fit (chain: 1): Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.
+Running the chains for more iterations may help. See
+https://mc-stan.org/misc/warnings.html#bulk-ess - 
+WARN [2025-11-14 15:43:22] dist_fit (chain: 1): Tail Effective Samples Size (ESS) is too low, indicating posterior variances and tail quantiles may be unreliable.
+Running the chains for more iterations may help. See
+https://mc-stan.org/misc/warnings.html#tail-ess - 
+WARN [2025-11-14 15:43:24] dist_fit (chain: 1): The largest R-hat is 1.08, indicating chains have not mixed.
 Running the chains for more iterations may help. See
 https://mc-stan.org/misc/warnings.html#r-hat - 
-WARN [2025-11-11 01:33:08] dist_fit (chain: 1): Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.
+WARN [2025-11-14 15:43:24] dist_fit (chain: 1): Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.
 Running the chains for more iterations may help. See
 https://mc-stan.org/misc/warnings.html#bulk-ess - 
-WARN [2025-11-11 01:33:08] dist_fit (chain: 1): Tail Effective Samples Size (ESS) is too low, indicating posterior variances and tail quantiles may be unreliable.
+WARN [2025-11-14 15:43:24] dist_fit (chain: 1): Tail Effective Samples Size (ESS) is too low, indicating posterior variances and tail quantiles may be unreliable.
 Running the chains for more iterations may help. See
 https://mc-stan.org/misc/warnings.html#tail-ess - 
-WARN [2025-11-11 01:33:11] dist_fit (chain: 1): The largest R-hat is 1.11, indicating chains have not mixed.
+WARN [2025-11-14 15:43:26] dist_fit (chain: 1): Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.
+Running the chains for more iterations may help. See
+https://mc-stan.org/misc/warnings.html#bulk-ess - 
+WARN [2025-11-14 15:43:26] dist_fit (chain: 1): Tail Effective Samples Size (ESS) is too low, indicating posterior variances and tail quantiles may be unreliable.
+Running the chains for more iterations may help. See
+https://mc-stan.org/misc/warnings.html#tail-ess - 
+WARN [2025-11-14 15:43:28] dist_fit (chain: 1): Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.
+Running the chains for more iterations may help. See
+https://mc-stan.org/misc/warnings.html#bulk-ess - 
+WARN [2025-11-14 15:43:28] dist_fit (chain: 1): Tail Effective Samples Size (ESS) is too low, indicating posterior variances and tail quantiles may be unreliable.
+Running the chains for more iterations may help. See
+https://mc-stan.org/misc/warnings.html#tail-ess - 
+WARN [2025-11-14 15:43:30] dist_fit (chain: 1): The largest R-hat is 1.07, indicating chains have not mixed.
 Running the chains for more iterations may help. See
 https://mc-stan.org/misc/warnings.html#r-hat - 
-WARN [2025-11-11 01:33:11] dist_fit (chain: 1): Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.
+WARN [2025-11-14 15:43:30] dist_fit (chain: 1): Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.
 Running the chains for more iterations may help. See
 https://mc-stan.org/misc/warnings.html#bulk-ess - 
-WARN [2025-11-11 01:33:11] dist_fit (chain: 1): Tail Effective Samples Size (ESS) is too low, indicating posterior variances and tail quantiles may be unreliable.
+WARN [2025-11-14 15:43:30] dist_fit (chain: 1): Tail Effective Samples Size (ESS) is too low, indicating posterior variances and tail quantiles may be unreliable.
 Running the chains for more iterations may help. See
 https://mc-stan.org/misc/warnings.html#tail-ess - 
-WARN [2025-11-11 01:33:13] dist_fit (chain: 1): The largest R-hat is 1.1, indicating chains have not mixed.
+WARN [2025-11-14 15:43:32] dist_fit (chain: 1): The largest R-hat is 1.07, indicating chains have not mixed.
 Running the chains for more iterations may help. See
 https://mc-stan.org/misc/warnings.html#r-hat - 
-WARN [2025-11-11 01:33:13] dist_fit (chain: 1): Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.
+WARN [2025-11-14 15:43:32] dist_fit (chain: 1): Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.
 Running the chains for more iterations may help. See
 https://mc-stan.org/misc/warnings.html#bulk-ess - 
-WARN [2025-11-11 01:33:13] dist_fit (chain: 1): Tail Effective Samples Size (ESS) is too low, indicating posterior variances and tail quantiles may be unreliable.
+WARN [2025-11-14 15:43:32] dist_fit (chain: 1): Tail Effective Samples Size (ESS) is too low, indicating posterior variances and tail quantiles may be unreliable.
 Running the chains for more iterations may help. See
 https://mc-stan.org/misc/warnings.html#tail-ess - 
-WARN [2025-11-11 01:33:15] dist_fit (chain: 1): Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.
+WARN [2025-11-14 15:43:34] dist_fit (chain: 1): Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.
 Running the chains for more iterations may help. See
 https://mc-stan.org/misc/warnings.html#bulk-ess - 
-WARN [2025-11-11 01:33:15] dist_fit (chain: 1): Tail Effective Samples Size (ESS) is too low, indicating posterior variances and tail quantiles may be unreliable.
-Running the chains for more iterations may help. See
-https://mc-stan.org/misc/warnings.html#tail-ess - 
-WARN [2025-11-11 01:33:17] dist_fit (chain: 1): Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.
-Running the chains for more iterations may help. See
-https://mc-stan.org/misc/warnings.html#bulk-ess - 
-WARN [2025-11-11 01:33:17] dist_fit (chain: 1): Tail Effective Samples Size (ESS) is too low, indicating posterior variances and tail quantiles may be unreliable.
+WARN [2025-11-14 15:43:34] dist_fit (chain: 1): Tail Effective Samples Size (ESS) is too low, indicating posterior variances and tail quantiles may be unreliable.
 Running the chains for more iterations may help. See
 https://mc-stan.org/misc/warnings.html#tail-ess - 
 ```
@@ -498,15 +498,15 @@ https://mc-stan.org/misc/warnings.html#tail-ess -
   meanlog:
     - normal distribution:
       mean:
-        0.21
+        0.28
       sd:
-        0.16
+        0.11
   sdlog:
     - normal distribution:
       mean:
-        1
+        0.94
       sd:
-        0.12
+        0.094
 ```
 
 ::::::::::::::::::
@@ -591,6 +591,13 @@ estimates <- EpiNow2::epinow(
 )
 ```
 
+``` output
+WARN [2025-11-14 15:47:44] epinow: There were 1 transitions after warmup that exceeded the maximum treedepth. Increase max_treedepth above 12. See
+https://mc-stan.org/misc/warnings.html#maximum-treedepth-exceeded - 
+WARN [2025-11-14 15:47:44] epinow: Examine the pairs() plot to diagnose sampling problems
+ - 
+```
+
 <!-- ``{r, message = FALSE,warning=FALSE, eval = TRUE, echo=FALSE} -->
 
 <!-- estimates <- EpiNow2::epinow( -->
@@ -665,24 +672,24 @@ summary(estimates)
 ```
 
 ``` output
-                        measure                 estimate
-                         <char>                   <char>
-1:       New infections per day     7821 (4823 -- 13140)
-2:   Expected change in reports        Likely decreasing
-3:   Effective reproduction no.       0.96 (0.75 -- 1.2)
-4:               Rate of growth -0.012 (-0.099 -- 0.079)
-5: Doubling/halving time (days)          -56 (8.8 -- -7)
+                        measure                estimate
+                         <char>                  <char>
+1:       New infections per day    7843 (4749 -- 13061)
+2:   Expected change in reports       Likely decreasing
+3:   Effective reproduction no.      0.96 (0.73 -- 1.2)
+4:               Rate of growth -0.013 (-0.11 -- 0.074)
+5: Doubling/halving time (days)       -52 (9.3 -- -6.4)
 ```
 
 Ces estimations étant basées sur des données partielles, elles présentent un large intervalle d'incertitude.
 
-- Le résumé de notre analyse montre que le changement attendu dans les déclarations est de Likely decreasing avec l'estimation des nouvelles infections 7821 (4823 -- 13140).
+- Le résumé de notre analyse montre que le changement attendu dans les déclarations est de Likely decreasing avec l'estimation des nouvelles infections 7843 (4749 -- 13061).
 
-- Le nombre effectif de reproduction $R_t$ (à la dernière date des données) est de 0.96 (0.75 -- 1.2).
+- Le nombre effectif de reproduction $R_t$ (à la dernière date des données) est de 0.96 (0.73 -- 1.2).
 
-- Le taux de croissance exponentiel du nombre de cas est de -0.012 (-0.099 -- 0.079).
+- Le taux de croissance exponentiel du nombre de cas est de -0.013 (-0.11 -- 0.074).
 
-- Le temps de doublement (le temps nécessaire pour que le nombre de cas double) est de -56 (8.8 -- -7).
+- Le temps de doublement (le temps nécessaire pour que le nombre de cas double) est de -52 (9.3 -- -6.4).
 
 ::::::::::::::::::::::::::::::::::::: callout
 

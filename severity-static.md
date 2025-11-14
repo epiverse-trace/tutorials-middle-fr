@@ -40,13 +40,9 @@ Les concepts abordés dans cet épisode supposent que vous êtes familiers avec 
 
 Installer les packages si elles ne le sont pas déjà:
 
-
-``` r
-# si {pak} n'est pas disponible, exécutez : install.packages("pak")
-pak::pak("cfr")
-pak::pak("epiparameter")
-pak::pak("tidyverse")
-pak::pak("outbreaks")
+```r 
+if (!base::require("pak")) install.packages("pak")
+pak::pak(c("cfr", "epiparameter", "tidyverse", "outbreaks"))
 ```
 
 Si vous recevez un message d'erreur, rendez-vous sur la [page principale de configuration](../learners/setup.md#configuration-des-logiciels).
@@ -159,7 +155,7 @@ ebola1976 %>%
   plot()
 ```
 
-<img src="fig/severity-static-rendered-unnamed-chunk-3-1.png" style="display: block; margin: auto;" />
+<img src="fig/severity-static-rendered-unnamed-chunk-2-1.png" style="display: block; margin: auto;" />
 
 Nous supposerons que nous sommes dans le contexte d'une **épidémie d'Ebola en cours** où nous disposons que des données collectées durant les **30 premiers jours** de l'épidémie.
 
@@ -380,7 +376,7 @@ onset_to_death_ebola <- epiparameter::epiparameter_db(
 plot(onset_to_death_ebola, xlim = c(0, 40))
 ```
 
-<img src="fig/severity-static-rendered-unnamed-chunk-11-1.png" style="display: block; margin: auto;" />
+<img src="fig/severity-static-rendered-unnamed-chunk-10-1.png" style="display: block; margin: auto;" />
 
 Pour prendre en compte la distribution du délai lors du calcul le RL ajusté au délai, nous devons fournir à l'arguemt `delay_density` de la fonction `cfr::cfr_static()` la valeur correspondante.
 
@@ -534,7 +530,7 @@ onset_to_death_ebola %>%
   plot(xlim = c(0, 40))
 ```
 
-<img src="fig/severity-static-rendered-unnamed-chunk-18-1.png" style="display: block; margin: auto;" />
+<img src="fig/severity-static-rendered-unnamed-chunk-17-1.png" style="display: block; margin: auto;" />
 
 ::::::::::::::::::
 
@@ -740,7 +736,7 @@ dplyr::bind_rows(
   )
 ```
 
-<img src="fig/severity-static-rendered-unnamed-chunk-27-1.png" style="display: block; margin: auto;" />
+<img src="fig/severity-static-rendered-unnamed-chunk-26-1.png" style="display: block; margin: auto;" />
 
 Les lignes rouges et bleues représentent respectivement le RL journalier ajusté au délai et naïf tout au long de l'épidémie. Les bandes autour d'elles représentent les intervalles de confiance à 95% (IC 95%).
 
