@@ -40,8 +40,8 @@ Les concepts abordés dans cet épisode supposent que vous êtes familiers avec 
 
 Installer les packages si elles ne le sont pas déjà:
 
-```{r, eval = FALSE}
-if(!require("pak")) install.packages("pak")
+```r 
+if (!base::require("pak")) install.packages("pak")
 pak::pak(c("cfr", "epiparameter", "tidyverse", "outbreaks"))
 ```
 
