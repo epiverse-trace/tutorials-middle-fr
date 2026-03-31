@@ -136,13 +136,6 @@ estimates <- EpiNow2::epinow(
 )
 ```
 
-``` output
-WARN [2025-11-11 01:44:47] epinow: There were 47 transitions after warmup that exceeded the maximum treedepth. Increase max_treedepth above 12. See
-https://mc-stan.org/misc/warnings.html#maximum-treedepth-exceeded - 
-WARN [2025-11-11 01:44:47] epinow: Examine the pairs() plot to diagnose sampling problems
- - 
-```
-
 ::::::::::::::::::::::::::::::::: callout
 
 ### N'attendez pas que cela se termine !
@@ -198,18 +191,27 @@ estimates <- EpiNow2::epinow(
   # Add observation model
   obs = EpiNow2::obs_opts(scale = obs_scale)
 )
+```
 
+``` output
+WARN [2026-03-31 02:05:17] epinow: There were 500 transitions after warmup that exceeded the maximum treedepth. Increase max_treedepth above 12. See
+https://mc-stan.org/misc/warnings.html#maximum-treedepth-exceeded - 
+WARN [2026-03-31 02:05:17] epinow: Examine the pairs() plot to diagnose sampling problems
+ - 
+```
+
+``` r
 base::summary(estimates)
 ```
 
 ``` output
                         measure                 estimate
                          <char>                   <char>
-1:       New infections per day   19968 (13162 -- 29794)
+1:       New infections per day   20209 (13301 -- 30154)
 2:   Expected change in reports        Likely decreasing
 3:   Effective reproduction no.       0.97 (0.77 -- 1.2)
-4:               Rate of growth -0.012 (-0.091 -- 0.064)
-5: Doubling/halving time (days)         -56 (11 -- -7.6)
+4:               Rate of growth -0.012 (-0.091 -- 0.068)
+5: Doubling/halving time (days)         -56 (10 -- -7.6)
 ```
 
 Les estimations des mesures de transmission telles que le nombre de reproduction efficace et le taux de croissance sont similaires (ou de même valeur) par rapport à la situation où nous n'avons pas tenu compte des observations incomplètes (voir [l'épisode de quantification de la  transmission](../episodes/quantify-transmissibility.md) dans la section "Recherche d'estimations"). Cependant, le nombre de nouveaux cas confirmés par date d'infection a considérablement changé d'ampleur pour refléter l'hypothèse selon laquelle seuls 40 % des cas sont déclarés.
@@ -294,9 +296,12 @@ estimate_cases_to_deaths <- EpiNow2::estimate_secondary(
 ```
 
 ``` output
-WARN [2025-11-11 01:49:02] estimate_secondary (chain: 1): Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.
+WARN [2026-03-31 02:05:24] estimate_secondary (chain: 1): Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.
 Running the chains for more iterations may help. See
 https://mc-stan.org/misc/warnings.html#bulk-ess - 
+WARN [2026-03-31 02:05:24] estimate_secondary (chain: 1): Tail Effective Samples Size (ESS) is too low, indicating posterior variances and tail quantiles may be unreliable.
+Running the chains for more iterations may help. See
+https://mc-stan.org/misc/warnings.html#tail-ess - 
 ```
 
 ::::::::::::::::::::::::::::::::::::: callout
@@ -517,29 +522,21 @@ ebola_estimates <- EpiNow2::epinow(
   # horizon needs to be 14 days to create two week forecast (default is 7 days)
   forecast = EpiNow2::forecast_opts(horizon = 14)
 )
-```
 
-``` output
-WARN [2025-11-11 01:50:04] epinow: Tail Effective Samples Size (ESS) is too low, indicating posterior variances and tail quantiles may be unreliable.
-Running the chains for more iterations may help. See
-https://mc-stan.org/misc/warnings.html#tail-ess - 
-```
-
-``` r
 summary(ebola_estimates)
 ```
 
 ``` output
                         measure                estimate
                          <char>                  <char>
-1:       New infections per day          94 (49 -- 190)
+1:       New infections per day          94 (50 -- 199)
 2:   Expected change in reports              Increasing
 3:   Effective reproduction no.        1.7 (1.2 -- 2.4)
-4:               Rate of growth 0.042 (0.0034 -- 0.087)
-5: Doubling/halving time (days)           17 (8 -- 210)
+4:               Rate of growth 0.042 (0.0044 -- 0.088)
+5: Doubling/halving time (days)         17 (7.8 -- 160)
 ```
 
-Le numéro de reproduction effectif $R_t$ (à la dernière date des données) est de 1.7 (1.2 -- 2.4). Le taux de croissance exponentiel du nombre de cas est de 0.042 (0.0034 -- 0.087).
+Le numéro de reproduction effectif $R_t$ (à la dernière date des données) est de 1.7 (1.2 -- 2.4). Le taux de croissance exponentiel du nombre de cas est de 0.042 (0.0044 -- 0.088).
 
 Visualisez les estimations :
 
