@@ -1,5 +1,5 @@
 ---
-title: Accéder aux distributions des retards épidémiologiques
+title: Accéder aux distributions des délais épidémiologiques
 teaching: 20
 exercises: 10
 editor_options:
@@ -8,14 +8,14 @@ editor_options:
 
 :::::::::::::::::::::::::::::::::::::: questions
 
-- Comment accéder aux distributions des délais des maladies à partir d'une base de données préétablie pour les utiliser dans l'analyse ?
+- Comment accéder aux distributions des délais épidémiologiques des maladies à partir d'une base de données préétablie pour les utiliser lors d'une analyse ?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
 
-- Obtenez les délais à partir d'une base de données de recherche documentaire avec `{epiparameter}`.
-- Obtenez les paramètres de distribution et les statistiques sommaires des distributions de retards.
+- Obtenir les délais à partir d'une base de données de recherche documentaire avec `{epiparameter}`.
+- Obtenir les paramètres de distribution et les statistiques sommaires des distributions de délais.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -27,13 +27,13 @@ Cet épisode nécessite que vous soyez familier avec :
 
 **la science des données** Programmation de base avec R.
 
-**Théorie des épidémies** La théorie des épidémies est basée sur les paramètres épidémiologiques, les périodes de la maladie, telles que la période d'incubation, le temps de génération et l'intervalle sériel.
+**Théorie des épidémies** Les paramètres épidémiologiques, la durée des phases d'une maladie telles que la période d'incubation, le temps de génération et l'intervalle sériel.
 
 :::::::::::::::::::::::::::::::::
 
 ## Introduction
 
-Les maladies infectieuses suivent un cycle infectieux qui comprend généralement les phases suivantes : période présymptomatique, période symptomatique et période de guérison, comme le décrivent leurs [histoire naturelle](../learners/reference.md#naturalhistory). Ces périodes peuvent être utilisées pour comprendre la dynamique de la transmission et informer les interventions de prévention et de contrôle des maladies.
+Les maladies infectieuses suivent un cycle infectieux qui comprend généralement les phases suivantes : période présymptomatique, période symptomatique et période de guérison, tel que leurs [histoire naturelle](../learners/reference.md#naturalhistory). Ces périodes peuvent être étudiées pour comprendre la dynamique de la transmission et informer les interventions de prévention et de contrôle des maladies.
 
 ![Définition des périodes clés. A partir de [Xiang et al, 2021](https://www.sciencedirect.com/science/article/pii/S2468042721000038)](fig/time-periods.jpg)
 
@@ -41,11 +41,11 @@ Les maladies infectieuses suivent un cycle infectieux qui comprend généralemen
 
 ### Définitions
 
-Regardez le [glossaire](../learners/reference.md) pour connaître les définitions de toutes les périodes de la figure ci-dessus !
+Consulter le [glossaire](../learners/reference.md) pour connaître les définitions de toutes les phases que vous voyez dans la figure ci-dessus !
 
 :::::::::::::::::::::::::
 
-Toutefois, au début d'une épidémie, les efforts visant à comprendre l'épidémie et les implications pour la lutte peuvent être retardés par l'absence d'un moyen facile d'accéder aux paramètres clés de la maladie en question ([Nash et al., 2023](https://mrc-ide.github.io/epireview/)). Des projets tels que `{epiparameter}` et `{epireview}` construisent des catalogues en ligne en suivant des protocoles de synthèse de la littérature qui peuvent aider à informer l'analyse et à paramétrer les modèles en fournissant une bibliothèque de paramètres épidémiologiques précédemment estimés à partir d'épidémies passées.
+Au début d'une épidémie, les efforts visant à comprendre l'épidémie et les implications pour la controler peuvent être retardés par l'absence de moyens pouvant faciliter l'accès aux paramètres clés de la maladie d'intérêt ([Nash et al., 2023](https://mrc-ide.github.io/epireview/)). Des projets tels que `{epiparameter}` et `{epireview}` mettent fournissent une bibliothèque de paramètres épidémiologiques précédemment estimés à partir d'épidémies passées, en se basant sur des protocoles de synthèse de la littérature, qui peuvent servir dans une analyse et à paramétrer ses modèles.
 
 :::::::::::::::::: instructor
 
@@ -53,11 +53,11 @@ Les premiers modèles pour COVID-19 utilisaient des paramètres d'autres coronav
 
 ::::::::::::::::::
 
-Pour illustrer l'utilisation de l'outil `{epiparameter}` R dans votre pipeline d'analyse, notre objectif dans cet épisode sera d'accéder à un ensemble spécifique de paramètres épidémiologiques de la littérature, au lieu d'extraire des articles et de les copier-coller à la main. Nous les insérerons ensuite dans un `{EpiNow2}` flux de travail d'analyse.
+Pour illustrer son usage dans votre pipeline d'analyse, notre objectif dans cet épisode sera d'accéder à un ensemble spécifique de paramètres épidémiologiques issus de la littérature en utilisant la librairie `{epiparameter}` de R, au lieu de les extraire des articles et les copier-coller à la main. Nous les insérerons ensuite dans un pipeline d'analyse de données basé sur `{EpiNow2}`.
 
 <!-- cet épisode, nous allons apprendre comment accéder à un ensemble spécifique de paramètres épidémiologiques à partir de la littérature et ensuite obtenir leurs **statistiques sommaires** en utilisant `{epiparameter}`.  -->
 
-Commençons par charger le fichier `{epiparameter}` paquetage. Nous utiliserons le tube `%>%` pour connecter certaines de ses fonctions, certaines `{tibble}` et `{dplyr}` donc appelons aussi à la fonction `{tidyverse}` paquetage :
+Commençons par charger la librairue `{epiparameter}`. Nous utiliserons l'opérateur “pipe” (`%>%`) de la librairie `{magrittr}` pour connecter certaines de ses fonctions, y compris celles des packages `{tibble}` et `{dplyr}. Nous chargerons ainsi la librairie `{tidyverse}`, “mère” de ces trois packages.
 
 ```{r, warning=FALSE, message=FALSE}
 library(epiparameter)
@@ -66,21 +66,22 @@ library(tidyverse)
 
 ::::::::::::::::::: checklist
 
-### Le double point-virgule
+### L'opérateur double deux-points (`::`)
 
-Le double point-virgule `::` dans R vous permet d'appeler une fonction spécifique d'un paquetage sans charger l'ensemble du paquetage dans l'environnement actuel.
+L'opérateur `::` de R permet d'accéder aux fonctions ou aux objets d'un package spécifique sans attacher l'intégralité du package (sans faire appel à la function`libray()`). Il offre plusieurs avantages, notamment :
 
-Par exemple, vous pouvez appeler une fonction spécifique d'un package sans charger le package entier dans l'environnement actuel, `dplyr::filter(data, condition)` utilise `filter()` à partir de l'outil `{dplyr}` paquet.
+* Indiquer explicitement le package d'origine d'une fonction, réduisant ainsi les ambiguïtés et les conflits potentiels lorsque plusieurs packages possèdent des fonctions portant le même nom.
+* Permettre d'appeler une fonction depuis un package sans charger l'intégralité du package avec `library()`.
 
-Cela nous permet de nous souvenir des fonctions du paquet et d'éviter les conflits d'espace de noms.
+Par exemple, la commande `dplyr::filter(data, condition)` signifie que nous appelons la fonction `filter()` depuis la librairie `{dplyr}`.
 
 :::::::::::::::::::
 
 ## Le problème
 
-Si nous voulons estimer la transmissibilité d'une infection, il est courant d'utiliser un package tel que `{EpiEstim}` ou `{EpiNow2}`. Le paquet `{EpiEstim}` permet d'estimer en temps réel le nombre de reproductions à l'aide des données relatives aux cas dans le temps, reflétant ainsi l'évolution de la transmission en fonction de la date d'apparition des symptômes. Pour estimer la transmission en fonction du moment où les personnes ont été effectivement infectées (plutôt que de l'apparition des symptômes), le logiciel `{EpiNow2}` étend cette idée en la combinant avec un modèle qui tient compte des retards dans les données observées. Les deux logiciels requièrent certaines informations épidémiologiques en entrée. Par exemple, dans `{EpiNow2}` nous utilisons `EpiNow2::Gamma()` pour spécifier un [temps de génération](../learners/reference.md#generationtime) sous la forme d'une distribution de probabilité ajoutant son `mean` l'écart-type (`sd`) et sa valeur maximale (`max`).
+Pour estimer la transmissibilité d'une infection, les packages les plus couramment utilisés sont `{EpiEstim}` et `{EpiNow2}`. Le package `{EpiEstim}` permet de faire une estimation en temps réel du nombre de reproductions à l'aide des données relatives aux cas enregistrés au cours du temps, reflétant ainsi l'évolution de la transmission en fonction de la date d'apparition des symptômes. Pour estimer la transmission en fonction du moment où les personnes ont été effectivement infectées (plutôt que de leurs dates d'apparition des symptômes), la librairie `{EpiNow2}` étend cette idée en la combinant avec un modèle qui tient compte des délais dans les données observées. Les deux packages requièrent certaines informations épidémiologiques en entrée. Par exemple, dans `{EpiNow2}` nous utilisons `EpiNow2::Gamma()` pour spécifier un [temps de génération](../learners/reference.md#generationtime) sous la forme d'une distribution de probabilité ajoutant sa moyenne `mean` l'écart-type (`sd`) et sa valeur maximale (`max`).
 
-Pour spécifier une valeur `generation_time` qui suit un *Gamma* avec une moyenne $\mu = 4$ écart-type $\sigma = 2$ et une valeur maximale de 20, nous écrivons :
+Pour spécifier un `generation_time` qui suit une distribution  *Gamma* avec une moyenne $\mu = 4$, un écart-type $\sigma = 2$ et une valeur maximale de 20, nous écrivons :
 
 ```r
 generation_time <- 
@@ -91,11 +92,11 @@ generation_time <-
   )
 ```
 
-Il est courant que les analystes recherchent manuellement la littérature disponible et copient et collent les résultats de la recherche. **statistiques sommaires** ou les **paramètres de distribution** des publications scientifiques. Une difficulté à laquelle on est souvent confronté est que la présentation des différentes distributions statistiques n'est pas cohérente dans la littérature (par exemple, un article peut ne présenter que la moyenne, plutôt que la distribution sous-jacente complète). `{epiparameter}` L'objectif du projet est de faciliter l'accès à des estimations fiables des paramètres de distribution pour une série de maladies infectieuses, afin qu'elles puissent être facilement mises en œuvre dans les pipelines d'analyse des épidémies.
+Il est courant que les analystes recherchent les valeurs de ces paramètres manuellement dans la littérature disponible. Une fois identifiées, ils copient et collent ces **paramètres de position** ou **paramètres de distribution** issus des publications scientifiques. Une difficulté à laquelle on est souvent confronté est que la présentation des différentes distributions statistiques n'est pas cohérente dans la littérature (par exemple, un article peut ne présenter que la moyenne, plutôt que la distribution sous-jacente complète). L'objectif de `{epiparameter}` est de faciliter l'accès à des estimations fiables des paramètres de distribution et de position pour une série de maladies infectieuses, afin qu'elles puissent être facilement utilisés dans les pipelines d'analyse des épidémies.
 
-Dans cet épisode, nous allons *accéder* les statistiques sommaires du temps de génération pour COVID-19 à partir de la bibliothèque de paramètres épidémiologiques fournie par l'Agence européenne pour la sécurité et la santé au travail (ESA). `{epiparameter}`. Ces paramètres peuvent être utilisés pour estimer la transmissibilité de cette maladie à l'aide de l'outil `{EpiNow2}` dans les épisodes suivants.
+Dans cet épisode, nous allons *accéder* aux paramètres de position du temps de génération pour COVID-19 à partir de la bibliothèque de paramètres épidémiologiques fournie par `{epiparameter}`. Ces paramètres peuvent être utilisés pour estimer la transmissibilité de cette maladie à l'aide du package `{EpiNow2}` dans les épisodes suivants.
 
-Commençons par examiner le nombre d'entrées actuellement disponibles dans la base de données des **base de données des distributions épidémiologiques** en `{epiparameter}` en utilisant `epiparameter_db()` pour la distribution épidémiologique `epi_name` appelé temps de génération avec la chaîne `"generation"`:
+Commençons par examiner le nombre d'enregistrements actuellement disponibles, dans la **base de données des distributions épidémiologiques** de la librairie `{epiparameter}` à travers sa fonction `epiparameter_db()`, pour la distribution épidémiologique appelée *temps de génération* (en donnant à l'argument `epi_name` la valeur `"generation"`).
 
 ```{r}
 epiparameter::epiparameter_db(
@@ -103,19 +104,19 @@ epiparameter::epiparameter_db(
 )
 ```
 
-Dans la bibliothèque des paramètres épidémiologiques, on peut ne pas disposer d'un `"generation"` pour la maladie qui nous intéresse. À la place, nous pouvons consulter le `serial` intervalles pour COVID-19. Voyons ce qu'il faut prendre en compte pour cela !
+Dans la bibliothèque des paramètres épidémiologiques, on peut ne pas trouver un **"temps de génération"** pour la maladie qui nous intéresse. À la place, nous pouvons consulter son **"interval sériel"**. Voyons ce qu'il faut prendre en compte pour cela !
 
 ::::::::::::::::: callout
 
 ### Analyse systématique des données relatives aux agents pathogènes prioritaires
 
-Les données de l'examen systématique des pathogènes prioritaires [`{epireview}` paquet R](https://mrc-ide.github.io/epireview/) contient des paramètres sur Ebola, Marburg et Lassa issus de revues systématiques récentes. D'autres agents pathogènes prioritaires sont prévus pour les prochaines versions. Jetez un coup d'œil à [cette vignette](https://epiverse-trace.github.io/epiparameter/articles/data_from_epireview.html) pour plus d'informations sur l'utilisation de ces paramètres avec `{epiparameter}`.
+Le package [`{epireview}`](https://mrc-ide.github.io/epireview/) de R contient des paramètres sur Ebola, Marburg et Lassa issus de revues systématiques récentes. D'autres agents pathogènes prioritaires vont être inclus dans les prochaines versions. Jetez un coup d'œil à [cette vignette](https://epiverse-trace.github.io/epiparameter/articles/data_from_epireview.html) pour plus d'informations sur l'utilisation de ces paramètres avec `{epiparameter}`.
 
 :::::::::::::::::::::::::
 
-## Temps de génération vs intervalle série
+## Temps de génération vs intervalle sériel
 
-Le temps de génération, conjointement avec le nombre de reproduction ($R$), peut fournir des indications précieuses sur le taux de croissance probable de l'épidémie et, partant, sur la mise en œuvre de mesuresde lutte. Plus la valeur de $R$ est grande et/ou plus le temps de génération est court, plus le nombre de nouvelles infections attendues par jour est élevé, et donc plus l'incidence des cas de maladie augmentera rapidement.
+Le temps de génération, conjointement avec le nombre de reproduction ($R$), peuvent fournir des indications précieuses sur le taux de croissance probable de l'épidémie et, ainsi permettre la mise en place de mesures de contrôle adéquates. Plus la valeur de $R$ est grande et/ou plus le temps de génération est court, plus le nombre de nouvelles infections attendues par jour est élevé, et donc plus l'incidence des cas de maladie augmentera rapidement.
 
 ![Vidéo du MRC Centre for Global Infectious Disease Analysis, Ep 76. Science In Context - Epi Parameter Review Group avec le Dr Anne Cori (27-07-2023) at <https://youtu.be/VvpYHhFDIjI?si=XiUyjmSV1gKNdrrL>](fig/reproduction-generation-time.png)
 
