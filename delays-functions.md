@@ -151,8 +151,8 @@ epiparameter::generate(covid_serialint, times = 10)
 ```
 
 ``` output
- [1] 3.856743 2.813588 6.546792 6.139642 5.639215 3.025440 5.955657 6.988792
- [9] 4.162420 2.926825
+ [1] 2.324427 1.344487 4.617312 5.716064 4.745394 3.353972 2.229447 6.447932
+ [9] 6.390123 4.504985
 ```
 
 ::::::::: instructor
@@ -459,7 +459,17 @@ epinow_estimates_cg <- EpiNow2::epinow(
   # delays
   generation_time = EpiNow2::generation_time_opts(serial_interval_covid)
 )
+```
 
+``` output
+WARN [2026-04-14 01:55:21] epinow: There were 3 divergent transitions after warmup. See
+https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
+to find out why this is a problem and how to eliminate them. - 
+WARN [2026-04-14 01:55:21] epinow: Examine the pairs() plot to diagnose sampling problems
+ - 
+```
+
+``` r
 base::plot(epinow_estimates_cg)
 ```
 
@@ -578,28 +588,7 @@ epinow_estimates_cgi <- EpiNow2::epinow(
   generation_time = EpiNow2::generation_time_opts(covid_serial_interval),
   delays = EpiNow2::delay_opts(covid_incubation_time)
 )
-```
 
-``` output
-WARN [2026-04-07 01:35:33] epinow: There were 1 divergent transitions after warmup. See
-https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
-to find out why this is a problem and how to eliminate them. - 
-WARN [2026-04-07 01:35:33] epinow: There were 1 chains where the estimated Bayesian Fraction of Missing Information was low. See
-https://mc-stan.org/misc/warnings.html#bfmi-low - 
-WARN [2026-04-07 01:35:33] epinow: Examine the pairs() plot to diagnose sampling problems
- - 
-WARN [2026-04-07 01:35:33] epinow: The largest R-hat is NA, indicating chains have not mixed.
-Running the chains for more iterations may help. See
-https://mc-stan.org/misc/warnings.html#r-hat - 
-WARN [2026-04-07 01:35:34] epinow: Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.
-Running the chains for more iterations may help. See
-https://mc-stan.org/misc/warnings.html#bulk-ess - 
-WARN [2026-04-07 01:35:36] epinow: Tail Effective Samples Size (ESS) is too low, indicating posterior variances and tail quantiles may be unreliable.
-Running the chains for more iterations may help. See
-https://mc-stan.org/misc/warnings.html#tail-ess - 
-```
-
-``` r
 base::plot(epinow_estimates_cgi)
 ```
 
@@ -741,17 +730,7 @@ epinow_estimates_egi <- EpiNow2::epinow(
   generation_time = EpiNow2::generation_time_opts(serial_interval_ebola),
   delays = EpiNow2::delay_opts(incubation_period_ebola)
 )
-```
 
-``` output
-WARN [2026-04-07 01:36:32] epinow: There were 1 divergent transitions after warmup. See
-https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
-to find out why this is a problem and how to eliminate them. - 
-WARN [2026-04-07 01:36:32] epinow: Examine the pairs() plot to diagnose sampling problems
- - 
-```
-
-``` r
 plot(epinow_estimates_egi)
 ```
 
