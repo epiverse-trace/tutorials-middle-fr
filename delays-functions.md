@@ -151,8 +151,8 @@ epiparameter::generate(covid_serialint, times = 10)
 ```
 
 ``` output
- [1] 7.023986 5.498094 4.839699 6.324168 3.378591 2.757394 4.044036 2.199916
- [9] 6.899184 3.557936
+ [1] 4.321530 2.018248 2.733734 2.034801 3.943299 5.951446 5.391692 2.025153
+ [9] 3.649455 5.091124
 ```
 
 ::::::::: instructor
@@ -578,28 +578,7 @@ epinow_estimates_cgi <- EpiNow2::epinow(
   generation_time = EpiNow2::generation_time_opts(covid_serial_interval),
   delays = EpiNow2::delay_opts(covid_incubation_time)
 )
-```
 
-``` output
-WARN [2026-05-05 02:10:37] epinow: There were 3 divergent transitions after warmup. See
-https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
-to find out why this is a problem and how to eliminate them. - 
-WARN [2026-05-05 02:10:37] epinow: There were 1 chains where the estimated Bayesian Fraction of Missing Information was low. See
-https://mc-stan.org/misc/warnings.html#bfmi-low - 
-WARN [2026-05-05 02:10:37] epinow: Examine the pairs() plot to diagnose sampling problems
- - 
-WARN [2026-05-05 02:10:38] epinow: The largest R-hat is NA, indicating chains have not mixed.
-Running the chains for more iterations may help. See
-https://mc-stan.org/misc/warnings.html#r-hat - 
-WARN [2026-05-05 02:10:39] epinow: Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.
-Running the chains for more iterations may help. See
-https://mc-stan.org/misc/warnings.html#bulk-ess - 
-WARN [2026-05-05 02:10:40] epinow: Tail Effective Samples Size (ESS) is too low, indicating posterior variances and tail quantiles may be unreliable.
-Running the chains for more iterations may help. See
-https://mc-stan.org/misc/warnings.html#tail-ess - 
-```
-
-``` r
 base::plot(epinow_estimates_cgi)
 ```
 
@@ -741,17 +720,7 @@ epinow_estimates_egi <- EpiNow2::epinow(
   generation_time = EpiNow2::generation_time_opts(serial_interval_ebola),
   delays = EpiNow2::delay_opts(incubation_period_ebola)
 )
-```
 
-``` output
-WARN [2026-05-05 02:11:30] epinow: There were 5 divergent transitions after warmup. See
-https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
-to find out why this is a problem and how to eliminate them. - 
-WARN [2026-05-05 02:11:30] epinow: Examine the pairs() plot to diagnose sampling problems
- - 
-```
-
-``` r
 plot(epinow_estimates_egi)
 ```
 

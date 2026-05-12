@@ -136,24 +136,6 @@ estimates <- EpiNow2::epinow(
 )
 ```
 
-``` output
-WARN [2026-05-05 02:15:27] epinow: There were 217 transitions after warmup that exceeded the maximum treedepth. Increase max_treedepth above 12. See
-https://mc-stan.org/misc/warnings.html#maximum-treedepth-exceeded - 
-WARN [2026-05-05 02:15:27] epinow: There were 1 chains where the estimated Bayesian Fraction of Missing Information was low. See
-https://mc-stan.org/misc/warnings.html#bfmi-low - 
-WARN [2026-05-05 02:15:27] epinow: Examine the pairs() plot to diagnose sampling problems
- - 
-WARN [2026-05-05 02:15:28] epinow: The largest R-hat is NA, indicating chains have not mixed.
-Running the chains for more iterations may help. See
-https://mc-stan.org/misc/warnings.html#r-hat - 
-WARN [2026-05-05 02:15:29] epinow: Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.
-Running the chains for more iterations may help. See
-https://mc-stan.org/misc/warnings.html#bulk-ess - 
-WARN [2026-05-05 02:15:31] epinow: Tail Effective Samples Size (ESS) is too low, indicating posterior variances and tail quantiles may be unreliable.
-Running the chains for more iterations may help. See
-https://mc-stan.org/misc/warnings.html#tail-ess - 
-```
-
 ::::::::::::::::::::::::::::::::: callout
 
 ### N'attendez pas que cela se termine !
@@ -212,9 +194,12 @@ estimates <- EpiNow2::epinow(
 ```
 
 ``` output
-WARN [2026-05-05 02:20:52] epinow: There were 310 transitions after warmup that exceeded the maximum treedepth. Increase max_treedepth above 12. See
+WARN [2026-05-12 02:25:32] epinow: There were 1 divergent transitions after warmup. See
+https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
+to find out why this is a problem and how to eliminate them. - 
+WARN [2026-05-12 02:25:32] epinow: There were 1 transitions after warmup that exceeded the maximum treedepth. Increase max_treedepth above 12. See
 https://mc-stan.org/misc/warnings.html#maximum-treedepth-exceeded - 
-WARN [2026-05-05 02:20:52] epinow: Examine the pairs() plot to diagnose sampling problems
+WARN [2026-05-12 02:25:32] epinow: Examine the pairs() plot to diagnose sampling problems
  - 
 ```
 
@@ -223,13 +208,13 @@ base::summary(estimates)
 ```
 
 ``` output
-                        measure                estimate
-                         <char>                  <char>
-1:       New infections per day  20290 (13558 -- 30858)
-2:   Expected change in reports                  Stable
-3:   Effective reproduction no.      0.97 (0.78 -- 1.2)
-4:               Rate of growth -0.011 (-0.09 -- 0.071)
-5: Doubling/halving time (days)       -66 (9.8 -- -7.7)
+                        measure                 estimate
+                         <char>                   <char>
+1:       New infections per day   20404 (13421 -- 30036)
+2:   Expected change in reports                   Stable
+3:   Effective reproduction no.       0.97 (0.77 -- 1.2)
+4:               Rate of growth -0.011 (-0.089 -- 0.065)
+5: Doubling/halving time (days)         -65 (11 -- -7.8)
 ```
 
 Les estimations des mesures de transmission telles que le nombre de reproduction efficace et le taux de croissance sont similaires (ou de même valeur) par rapport à la situation où nous n'avons pas tenu compte des observations incomplètes (voir [l'épisode de quantification de la  transmission](../episodes/quantify-transmissibility.md) dans la section "Recherche d'estimations"). Cependant, le nombre de nouveaux cas confirmés par date d'infection a considérablement changé d'ampleur pour refléter l'hypothèse selon laquelle seuls 40 % des cas sont déclarés.
@@ -311,12 +296,6 @@ estimate_cases_to_deaths <- EpiNow2::estimate_secondary(
   secondary = EpiNow2::secondary_opts(type = "incidence"),
   delays = EpiNow2::delay_opts(delay_report_to_death)
 )
-```
-
-``` output
-WARN [2026-05-05 02:21:00] estimate_secondary (chain: 1): Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.
-Running the chains for more iterations may help. See
-https://mc-stan.org/misc/warnings.html#bulk-ess - 
 ```
 
 ::::::::::::::::::::::::::::::::::::: callout
@@ -540,10 +519,10 @@ ebola_estimates <- EpiNow2::epinow(
 ```
 
 ``` output
-WARN [2026-05-05 02:21:56] epinow: There were 2 divergent transitions after warmup. See
+WARN [2026-05-12 02:26:36] epinow: There were 1 divergent transitions after warmup. See
 https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
 to find out why this is a problem and how to eliminate them. - 
-WARN [2026-05-05 02:21:56] epinow: Examine the pairs() plot to diagnose sampling problems
+WARN [2026-05-12 02:26:36] epinow: Examine the pairs() plot to diagnose sampling problems
  - 
 ```
 
@@ -552,16 +531,16 @@ summary(ebola_estimates)
 ```
 
 ``` output
-                        measure                estimate
-                         <char>                  <char>
-1:       New infections per day          93 (48 -- 190)
-2:   Expected change in reports              Increasing
-3:   Effective reproduction no.        1.6 (1.1 -- 2.4)
-4:               Rate of growth 0.041 (0.0024 -- 0.087)
-5: Doubling/halving time (days)           17 (8 -- 290)
+                        measure               estimate
+                         <char>                 <char>
+1:       New infections per day         92 (48 -- 186)
+2:   Expected change in reports             Increasing
+3:   Effective reproduction no.       1.6 (1.2 -- 2.4)
+4:               Rate of growth 0.041 (0.002 -- 0.085)
+5: Doubling/halving time (days)        17 (8.1 -- 350)
 ```
 
-Le numéro de reproduction effectif $R_t$ (à la dernière date des données) est de 1.6 (1.1 -- 2.4). Le taux de croissance exponentiel du nombre de cas est de 0.041 (0.0024 -- 0.087).
+Le numéro de reproduction effectif $R_t$ (à la dernière date des données) est de 1.6 (1.2 -- 2.4). Le taux de croissance exponentiel du nombre de cas est de 0.041 (0.002 -- 0.085).
 
 Visualisez les estimations :
 
